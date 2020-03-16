@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-
 import 'navigation.dart';
 
 
@@ -11,12 +10,19 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   bool showFirst = true;
+  int _selectedIndex = 0;
 
   @override
   void initState() {
     super.initState();
 
   }
+
+  void _onItemTapped(int index) {
+  setState(() {
+    _selectedIndex = index;
+  });
+}
 
   @override
   Widget build(BuildContext context) {
@@ -85,13 +91,27 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
           ],
         ) ,),
       body: new Center(
-
       ),
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.red,
-        onPressed: () => {},
-        child: Icon(Icons.person, color: Colors.white, size: 40.0,),
-      ),
+    bottomNavigationBar: BottomNavigationBar(
+      items: const <BottomNavigationBarItem>[
+        BottomNavigationBarItem(
+          icon: Icon(Icons.home),
+          title: Text('Home'),
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.search),
+          title: Text('Discover'),
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.account_balance),
+          title: Text('Account'),
+        ),
+      ],
+      currentIndex: _selectedIndex,
+      
+      selectedItemColor: Colors.red,
+      onTap: _onItemTapped,
+    ),
     );
   }
 }
