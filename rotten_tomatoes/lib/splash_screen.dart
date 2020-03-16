@@ -54,7 +54,9 @@ class _SplashScreenState extends State<SplashScreen> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    CircularProgressIndicator(backgroundColor: Colors.red,),
+                    CircularProgressIndicator(backgroundColor: Colors.red,
+                    valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                      ),
                     Padding(
                       padding: EdgeInsets.only(top: 20.0),
                     ),
