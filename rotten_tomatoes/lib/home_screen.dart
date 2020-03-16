@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import 'navigation.dart';
+
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -23,14 +25,65 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
         backgroundColor: Colors.red,
         title: Text("Pyxy",
         style: GoogleFonts.pacifico(),
-        // TextStyle(
-        //   GoogleFonts.pacifico(),
-        //   fontStyle: FontStyle.italic,
-        //   fontSize: 18.0,
-        // ),
         ),
       ),
-      drawer: Drawer(),
+      drawer: Drawer(
+        child: ListView(
+          padding : EdgeInsets.zero,
+          children: <Widget>[
+            DrawerHeader(
+              child: Text('Drawer Header'),
+              decoration: BoxDecoration(
+                color: Colors.red,
+              ),
+            ),
+            ListTile(
+              title: Text('Home'),
+              onTap: () {
+                // Update the state of the app
+                // ...
+                // Then close the drawer
+                MyNavigator.goToHome(context);
+              },
+            ),
+            ListTile(
+              title: Text('My Account'),
+              onTap: () {
+                // Update the state of the app
+                // ...
+                // Then close the drawer
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              title: Text('My Preferences'),
+              onTap: () {
+                // Update the state of the app
+                // ...
+                // Then close the drawer
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              title: Text('About Us'),
+              onTap: () {
+                // Update the state of the app
+                // ...
+                // Then close the drawer
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              title: Text('Help'),
+              onTap: () {
+                // Update the state of the app
+                // ...
+                // Then close the drawer
+                Navigator.pop(context);
+              },
+            ),
+          ],
+        ) ,),
       body: new Center(
 
       ),
