@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'navigation.dart';
+import 'Screens/movieHomeUI.dart';
 
 
 class HomeScreen extends StatefulWidget {
@@ -11,6 +12,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   bool showFirst = true;
   int _selectedIndex = 0;
+
 
   @override
   void initState() {
@@ -91,6 +93,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
           ],
         ) ,),
       body: new Center(
+        child: MovieHomeUI(),
       ),
     bottomNavigationBar: BottomNavigationBar(
       items: const <BottomNavigationBarItem>[
