@@ -5,7 +5,7 @@ import 'playListPage.dart';
 
 var routes = <String, WidgetBuilder>{
   "/home": (BuildContext context) => HomeScreen(),
-  "/playList": (context) => PlayListHomePage(),
+  "/playList": (context) => PlayListView(),
 };
 
 void main() => runApp(new MaterialApp(
