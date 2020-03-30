@@ -1,21 +1,20 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class PlayList {
-  String name;
+class PlayList{
   String url;
+  var avatar;
   DocumentReference reference;
 
-  PlayList({this.name,this.url});
+  PlayList({this.url});
 
-  PlayList.fromMap(Map<String, dynamic> map, {this.reference}) {
-    name = map["name"];
-    url = map["url"];
+  PlayList.fromMap(Map<String,dynamic> map,{this.reference}){
+    url=map["url"];
+    avatar=map["avatar"];
   }
-
   PlayList.fromSnapshot(DocumentSnapshot snapshot)
-      : this.fromMap(snapshot.data, reference: snapshot.reference);
+      :this.fromMap(snapshot.data,reference:snapshot.reference);
 
-  toJson() {
-    return {'name: ': name};
+  toJson(){
+    return {'url':url};
   }
 }

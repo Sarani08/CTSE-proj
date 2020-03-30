@@ -1,48 +1,43 @@
-import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/widgets.dart';
-import 'playList.dart';
-import 'playListApi.dart';
+import 'PlayList.dart';
+import 'package:flutter/material.dart';
+import 'PlayListApi.dart';
 
-void main() => runApp(App());
+void main() => runApp(PlayListHomePage());
 
-class App extends StatelessWidget {
+class PlayListHomePage extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'PlayList',
-      home: PlayListHomePage(),
+      home: PlayListView(),
     );
   }
 }
 
-class PlayListHomePage extends StatefulWidget {
-  PlayListHomePage() : super();
+class PlayListView extends StatefulWidget {
+  PlayListView() : super();
 
-  final String title = 'PlayList';
+  final String title = "Play List";
 
   @override
-  PlayListSState createState() => PlayListSState();
+  PlayListState createState() => PlayListState();
 }
 
-class PlayListSState extends State<PlayListHomePage> {
-  bool showTextField = false;
-  TextEditingController controller = TextEditingController();
+class PlayListState extends State<PlayListView> {
+  bool urlField = false;
   TextEditingController urlcontroller = TextEditingController();
-  String collectionName = "Users";
+  String collectionName = "PlayList";
   bool isEditing = false;
-  PlayList curPlayList;
-  PlayListApi playListApi = new PlayListApi();
-
-
+  PlayList curPlay;
+  PlayListApi api = new PlayListApi();
 
   Widget buildBody(BuildContext context) {
     return StreamBuilder<QuerySnapshot>(
-      stream: playListApi.getList(),
+      stream: api.getList(),
       builder: (context, snapshot) {
         if (snapshot.hasError) {
-          return Text('ERROR ${snapshot.error}');
+          return Text('Error ${snapshot.error}');
         }
         if (snapshot.hasData) {
           print("Documents ${snapshot.data.documents.length}");
@@ -60,9 +55,9 @@ class PlayListSState extends State<PlayListHomePage> {
   }
 
   Widget buildListItem(BuildContext context, DocumentSnapshot data) {
-    final playList = PlayList.fromSnapshot(data);
+    final playlist = PlayList.fromSnapshot(data);
     return Padding(
-      key: ValueKey(playList.name),
+      key: ValueKey(playlist.url),
       padding: EdgeInsets.symmetric(vertical: 8.0),
       child: Container(
         decoration: BoxDecoration(
@@ -70,17 +65,17 @@ class PlayListSState extends State<PlayListHomePage> {
           borderRadius: BorderRadius.circular(5.0),
         ),
         child: ListTile(
-          title: Text(playList.name),
+          title: Text(playlist.url),
           trailing: IconButton(
             icon: Icon(Icons.delete),
             onPressed: () {
-              //delete playlist
-              playListApi.deleteList(playList);
+              // delete
+              api.deleteList(playlist);
             },
           ),
           onTap: () {
-            // update playlist
-            setUpdateUI(playList);
+            // update
+            setUpdateUI(playlist);
           },
         ),
       ),
@@ -89,24 +84,23 @@ class PlayListSState extends State<PlayListHomePage> {
 
   add() {
     if (isEditing) {
-      playListApi.updateList(curPlayList, controller.text,urlcontroller.text);
+      // Update
+      api.updateList(curPlay, urlcontroller.text);
       setState(() {
         isEditing = false;
       });
     } else {
-      playListApi.addList(controller.text,urlcontroller.text);
+      api.addToList(urlcontroller.text);
     }
-    controller.text = 'abc';
-    urlcontroller.text = 'abc';
+    urlcontroller.text = '';
   }
 
   setUpdateUI(PlayList playList) {
-    controller.text = playList.name;
     urlcontroller.text = playList.url;
     setState(() {
-      showTextField = true;
+      urlField = true;
       isEditing = true;
-      curPlayList = playList;
+      curPlay = playList;
     });
   }
 
@@ -118,7 +112,7 @@ class PlayListSState extends State<PlayListHomePage> {
         onPressed: () {
           add();
           setState(() {
-            showTextField = false;
+            urlField = false;
           });
         },
       ),
@@ -135,43 +129,43 @@ class PlayListSState extends State<PlayListHomePage> {
             icon: Icon(Icons.add),
             onPressed: () {
               setState(() {
-                showTextField = !showTextField;
+                urlField = !urlField;
               });
             },
-          )
+          ),
         ],
       ),
       body: Container(
         padding: EdgeInsets.all(20.0),
         child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: <Widget>[
-              showTextField
-                  ? Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: <Widget>[
-                  TextFormField(
-                    controller: controller,
-                    decoration: InputDecoration(
-                        labelText: "Name", hintText: "Enter name"),
-                  ),
-                  SizedBox(height: 10),
-                  button(),
-                ],
-              )
-                  : Container(),
-              SizedBox(height: 20),
-              Text(
-                "PlayList",
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.w900),
-              ),
-              SizedBox(height: 20),
-              Flexible(
-                child: buildBody(context),
-              ),
-            ]),
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: <Widget>[
+            urlField
+                ? Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: <Widget>[
+                TextFormField(
+                  controller: urlcontroller,
+                  decoration: InputDecoration(
+                      labelText: "Url", hintText: "Enter url"),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                button(),
+              ],
+            )
+                : Container(),
+            SizedBox(
+              height: 20,
+            ),
+            Flexible(
+              child: buildBody(context),
+            ),
+          ],
+        ),
       ),
     );
   }
