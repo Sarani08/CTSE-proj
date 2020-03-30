@@ -64,12 +64,11 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
               },
             ),
             ListTile(
-              title: Text('My Preferences'),
+              title: Text('My PlayList'),
               onTap: () {
                 // Update the state of the app
-                // ...
                 // Then close the drawer
-                Navigator.pop(context);
+                MyNavigator.goToPlayList(context);
               },
             ),
             ListTile(

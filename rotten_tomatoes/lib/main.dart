@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'home_screen.dart';
 import 'splash_screen.dart';
+import 'playListPage.dart';
 
 var routes = <String, WidgetBuilder>{
   "/home": (BuildContext context) => HomeScreen(),
+  "/playList": (context) => PlayListView(),
 };
 
 void main() => runApp(new MaterialApp(

@@ -29,6 +29,11 @@
 .pub-cache/
 .pub/
 /build/
+/out/
+/android/app/src/debug/gen/
+/android/app/src/main/gen/
+/android/app/src/profile/gen/
+
 
 # Web related
 lib/generated_plugin_registrant.dart
