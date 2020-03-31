@@ -16,4 +16,8 @@ class MyNavigator {
   static void goToSearch(BuildContext context) {
     Navigator.pushNamed(context, "/search");
   }
+
+  static void goToLoginRegisterWelcome(BuildContext context) {
+    Navigator.pushNamed(context, "/loginRegisterWelcome");
+  } 
 }

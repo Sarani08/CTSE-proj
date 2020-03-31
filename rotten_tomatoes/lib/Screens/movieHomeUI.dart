@@ -43,9 +43,9 @@ class _MovieHomeUIState extends State<MovieHomeUI> {
                 padding: const EdgeInsets.all(10.0),
                 child: Row(
                   children: <Widget>[
-                    // CircleAvatar(
-                    //   backgroundImage: NetworkImage(userData[index]["multimedia"]["src"]),
-                    // ),
+                    CircleAvatar(
+                      backgroundImage: NetworkImage(userData[index]["multimedia"]["src"]),
+                    ),
                     Padding(
                       padding: const EdgeInsets.all(10.0),
                       child: Text("${userData[index]["display_title"]}",
