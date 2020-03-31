@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:async';
 import 'dart:convert';
-import 'file:///C:/Users/rusnlk/Desktop/sliit/4y1s/CTSE/CTSE-proj/rotten_tomatoes/lib/Screens/playListApi.dart';
+
 import 'package:rotten_tomatoes/navigation.dart';
+import 'playListApi.dart';
 
 
 

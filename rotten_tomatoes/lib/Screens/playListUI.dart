@@ -2,6 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'playList.dart';
 import 'package:flutter/material.dart';
 import 'playListApi.dart';
+import 'package:google_fonts/google_fonts.dart';
+import '../navigation.dart';
 
 class PlayListView extends StatefulWidget {
   PlayListView() : super();
@@ -127,7 +129,19 @@ class PlayListState extends State<PlayListView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        backgroundColor: Colors.red,
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.help_outline),
+            onPressed: () {
+              MyNavigator.goToHelp(context);
+            },
+          ),
+        ],
+        title: Text(
+          "Preferences",
+          style: GoogleFonts.pacifico(),
+        ),
       ),
       body: Container(
         padding: EdgeInsets.all(20.0),

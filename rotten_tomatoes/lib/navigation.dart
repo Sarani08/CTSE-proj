@@ -20,4 +20,8 @@ class MyNavigator {
   static void goToLoginRegisterWelcome(BuildContext context) {
     Navigator.pushNamed(context, "/loginRegisterWelcome");
   } 
+
+  static void goToRegister(BuildContext context){
+    Navigator.pushNamed(context, "/register");
+  }
 }
