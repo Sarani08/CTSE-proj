@@ -8,4 +8,12 @@ class MyNavigator {
   static void goToPlayList(BuildContext context) {
     Navigator.pushNamed(context, "/playList");
   }
+
+  static void goToHelp(BuildContext context) {
+    Navigator.pushNamed(context, "/help");
+  }
+
+  static void goToSearch(BuildContext context) {
+    Navigator.pushNamed(context, "/search");
+  }
 }
