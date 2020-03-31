@@ -9,6 +9,14 @@ class MyNavigator {
     Navigator.pushNamed(context, "/playList");
   }
 
+  static void goToHelp(BuildContext context) {
+    Navigator.pushNamed(context, "/help");
+  }
+
+  static void goToSearch(BuildContext context) {
+    Navigator.pushNamed(context, "/search");
+  }
+
   static void goToLoginRegisterWelcome(BuildContext context) {
     Navigator.pushNamed(context, "/loginRegisterWelcome");
   } 
