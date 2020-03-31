@@ -107,6 +107,8 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
         BottomNavigationBarItem(
           icon: Icon(Icons.account_balance),
           title: Text('Account'),
+          
+
         ),
       ],
       currentIndex: _selectedIndex,
