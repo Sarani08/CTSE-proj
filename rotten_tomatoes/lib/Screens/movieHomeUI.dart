@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:async';
 import 'dart:convert';
-import 'file:///C:/Users/rusnlk/Desktop/sliit/4y1s/CTSE/CTSE-proj/rotten_tomatoes/lib/Screens/playListApi.dart';
-import 'package:rotten_tomatoes/navigation.dart';
 
 
 
@@ -16,7 +14,6 @@ class _MovieHomeUIState extends State<MovieHomeUI> {
 
   Map data;
   List userData;
-  PlayListApi api = new PlayListApi();
 
   Future getData() async {
     http.Response response = await http.get("https://api.nytimes.com/svc/movies/v2/reviews/all.json?&api-key=kq71eQPzi5qiOMAHNNc8aTOiBrYkvYWL");
@@ -53,18 +50,7 @@ class _MovieHomeUIState extends State<MovieHomeUI> {
                         fontSize: 20.0,
                         fontWeight: FontWeight.w700,
                       ),),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: IconButton(
-                        icon: Icon(Icons.playlist_add),
-                        onPressed: () {
-                          api.addToList(userData[index]["display_title"],userData[index]["multimedia"]["src"]);
-                          MyNavigator.goToPlayList(context);
-                        },
-
-                      )
-                    ),
+                    )
                   ],
                 ),
               ),

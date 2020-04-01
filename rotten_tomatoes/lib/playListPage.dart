@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'playList.dart';
+import 'PlayList.dart';
 import 'package:flutter/material.dart';
-import 'playListApi.dart';
+import 'PlayListApi.dart';
 
 class PlayListView extends StatefulWidget {
   PlayListView() : super();
@@ -66,6 +66,10 @@ class PlayListState extends State<PlayListView> {
             Padding(
               padding: const EdgeInsets.all(10.0),
               child: Row(children: <Widget>[
+//                  new CircleAvatar(
+//                    backgroundImage: NetworkImage(playlist.avatar),
+//                  ),
+//              new Text(playlist.url),
                 SizedBox(width: 70),
                 new IconButton(
                     icon: new Icon(Icons.edit),
@@ -95,6 +99,8 @@ class PlayListState extends State<PlayListView> {
       setState(() {
         isEditing = false;
       });
+    } else {
+      api.addToList(urlcontroller.text);
     }
     urlcontroller.text = '';
   }
@@ -142,7 +148,8 @@ class PlayListState extends State<PlayListView> {
                     children: <Widget>[
                       TextFormField(
                         controller: urlcontroller,
-                        decoration: InputDecoration(labelText: "Change name"),
+                        decoration: InputDecoration(
+                            labelText: "Name", hintText: "Change Name"),
                       ),
                       SizedBox(
                         height: 10,

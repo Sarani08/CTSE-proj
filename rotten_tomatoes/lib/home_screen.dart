@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'navigation.dart';
 import 'Screens/movieHomeUI.dart';
 
+
 class HomeScreen extends StatefulWidget {
   @override
   _HomeScreenState createState() => new _HomeScreenState();
@@ -20,32 +21,23 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   }
 
   void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
+  setState(() {
+    _selectedIndex = index;
+  });
+}
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.red,
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.help_outline),
-            onPressed: () {
-              MyNavigator.goToHelp(context);
-            },
-          ),
-        ],
-        title: Text(
-          "Pyxy",
-          style: GoogleFonts.pacifico(),
+        title: Text("Pyxy",
+        style: GoogleFonts.pacifico(),
         ),
       ),
       drawer: Drawer(
         child: ListView(
-          padding: EdgeInsets.zero,
+          padding : EdgeInsets.zero,
           children: <Widget>[
             DrawerHeader(
               child: Text('Drawer Header'),
@@ -74,6 +66,8 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
             ListTile(
               title: Text('My PlayList'),
               onTap: () {
+                // Update the state of the app
+                // Then close the drawer
                 MyNavigator.goToPlayList(context);
               },
             ),
@@ -86,31 +80,40 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                 Navigator.pop(context);
               },
             ),
+            ListTile(
+              title: Text('Help'),
+              onTap: () {
+                // Update the state of the app
+                // ...
+                // Then close the drawer
+                Navigator.pop(context);
+              },
+            ),
           ],
-        ),
-      ),
+        ) ,),
       body: new Center(
         child: MovieHomeUI(),
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            title: Text('Home'),
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.search),
-            title: Text('Search'),
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.account_balance),
-            title: Text('Account'),
-          ),
-        ],
-        currentIndex: _selectedIndex,
-        selectedItemColor: Colors.red,
-        onTap: _onItemTapped,
-      ),
+    bottomNavigationBar: BottomNavigationBar(
+      items: const <BottomNavigationBarItem>[
+        BottomNavigationBarItem(
+          icon: Icon(Icons.home),
+          title: Text('Home'),
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.search),
+          title: Text('Discover'),
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.account_balance),
+          title: Text('Account'),
+        ),
+      ],
+      currentIndex: _selectedIndex,
+      
+      selectedItemColor: Colors.red,
+      onTap: _onItemTapped,
+    ),
     );
   }
 }
