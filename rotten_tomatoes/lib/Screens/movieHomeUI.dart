@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:async';
 import 'dart:convert';
-import 'file:///C:/Users/rusnlk/Desktop/sliit/4y1s/CTSE/CTSE-proj/rotten_tomatoes/lib/Screens/playListApi.dart';
+
 import 'package:rotten_tomatoes/navigation.dart';
+import 'playListApi.dart';
 
 
 
@@ -36,41 +37,34 @@ class _MovieHomeUIState extends State<MovieHomeUI> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: ListView.builder(
+          padding: const EdgeInsets.all(10.0) ,
           itemCount: userData == null ? 0 : userData.length,
           itemBuilder: (BuildContext context, int index) {
-            return Card(
-              child: Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: Row(
-                  children: <Widget>[
-                    CircleAvatar(
-                      backgroundImage: NetworkImage(userData[index]["multimedia"]["src"]),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: Text("${userData[index]["display_title"]}",
-                      style: TextStyle(
-                        fontSize: 20.0,
-                        fontWeight: FontWeight.w700,
-                      ),),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: IconButton(
-                        icon: Icon(Icons.playlist_add),
-                        onPressed: () {
-                          api.addToList(userData[index]["display_title"],userData[index]["multimedia"]["src"]);
-                          MyNavigator.goToPlayList(context);
-                        },
-
-                      )
-                    ),
-                  ],
+              return new GestureDetector(
+                child: new Card(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      ListTile(
+                        title: Text("${userData[index]["display_title"]}",
+                            style: TextStyle(fontWeight: FontWeight.w500)),
+                        subtitle: Text("${userData[index]["summary_short"]}"),
+                        trailing: Text("${userData[index]["critics_pick"]}", style: TextStyle(color: Colors.red),),
+                        leading: Image.network(userData[index]["multimedia"]["src"]),
+                                              
+                      ),          
+                    ],),
                 ),
-              ),
-            );
+
+                onTap: () {
+                  api.addToList(userData[index]["display_title"],userData[index]["multimedia"]["src"]);
+                  MyNavigator.goToPlayList(context);
+                },
+              );
           },
       ),
     );
   }
+  
 }
