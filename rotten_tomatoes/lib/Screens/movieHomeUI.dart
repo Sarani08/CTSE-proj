@@ -2,11 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:async';
 import 'dart:convert';
-
-import 'package:rotten_tomatoes/navigation.dart';
-import 'playListApi.dart';
-
-
+import 'movieDetailsUI.dart';
 
 class MovieHomeUI extends StatefulWidget {
   @override
@@ -17,7 +13,7 @@ class _MovieHomeUIState extends State<MovieHomeUI> {
 
   Map data;
   List userData;
-  PlayListApi api = new PlayListApi();
+  String title;
 
   Future getData() async {
     http.Response response = await http.get("https://api.nytimes.com/svc/movies/v2/reviews/all.json?&api-key=kq71eQPzi5qiOMAHNNc8aTOiBrYkvYWL");
@@ -49,7 +45,7 @@ class _MovieHomeUIState extends State<MovieHomeUI> {
                       ListTile(
                         title: Text("${userData[index]["display_title"]}",
                             style: TextStyle(fontWeight: FontWeight.w500)),
-                        subtitle: Text("${userData[index]["summary_short"]}"),
+                        subtitle: Text("${userData[index]["headline"]}"),
                         trailing: Text("${userData[index]["critics_pick"]}", style: TextStyle(color: Colors.red),),
                         leading: Image.network(userData[index]["multimedia"]["src"]),
                                               
@@ -58,8 +54,24 @@ class _MovieHomeUIState extends State<MovieHomeUI> {
                 ),
 
                 onTap: () {
-                  api.addToList(userData[index]["display_title"],userData[index]["multimedia"]["src"]);
-                  MyNavigator.goToPlayList(context);
+
+
+                  String title = userData[index]["display_title"];
+                  String imageURl = userData[index]["multimedia"]["src"];
+                  int critics = userData[index]["critics_pick"];
+                  String summary = userData[index]["summary_short"];
+                  String date = userData[index]["publication_date"];
+                  String author = userData[index]["byline"];
+
+
+                  Navigator.push(context, 
+                  new MaterialPageRoute(builder: (context){
+                      return new MovieDetailUI(imageURl ,title,summary,date,author,critics);
+                  }));
+                  
+                  
+                 // api.addToList(userData[index]["display_title"],userData[index]["multimedia"]["src"]);
+                  // MyNavigator.goToPlayList(context);
                 },
               );
           },
