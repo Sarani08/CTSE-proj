@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'navigation.dart';
 import 'Screens/movieHomeUI.dart';
-
+import 'Screens/LoginSignUpWelcome.dart';
+import 'Screens/searchUI.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -12,7 +13,11 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   bool showFirst = true;
   int _selectedIndex = 0;
-
+  final _pageOptions = [
+    MovieHomeUI(),
+    SearchUI(),
+    LoginSignUPWelcome()
+  ];
 
   @override
   void initState() {
@@ -21,23 +26,17 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   }
 
   void _onItemTapped(int index) {
-  setState(() {
-    _selectedIndex = index;
-  });
-}
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.red,
-        title: Text("Pyxy",
-        style: GoogleFonts.pacifico(),
-        ),
-      ),
       drawer: Drawer(
         child: ListView(
-          padding : EdgeInsets.zero,
+          padding: EdgeInsets.zero,
           children: <Widget>[
             DrawerHeader(
               child: Text('Drawer Header'),
@@ -60,14 +59,12 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                 // Update the state of the app
                 // ...
                 // Then close the drawer
-                Navigator.pop(context);
+                MyNavigator.goToLoginRegisterWelcome(context);
               },
             ),
             ListTile(
               title: Text('My PlayList'),
               onTap: () {
-                // Update the state of the app
-                // Then close the drawer
                 MyNavigator.goToPlayList(context);
               },
             ),
@@ -80,40 +77,33 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                 Navigator.pop(context);
               },
             ),
-            ListTile(
-              title: Text('Help'),
-              onTap: () {
-                // Update the state of the app
-                // ...
-                // Then close the drawer
-                Navigator.pop(context);
-              },
-            ),
           ],
-        ) ,),
-      body: new Center(
-        child: MovieHomeUI(),
+        ),
       ),
-    bottomNavigationBar: BottomNavigationBar(
-      items: const <BottomNavigationBarItem>[
-        BottomNavigationBarItem(
-          icon: Icon(Icons.home),
-          title: Text('Home'),
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.search),
-          title: Text('Discover'),
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.account_balance),
-          title: Text('Account'),
-        ),
-      ],
-      currentIndex: _selectedIndex,
-      
-      selectedItemColor: Colors.red,
-      onTap: _onItemTapped,
-    ),
+      body: _pageOptions[_selectedIndex],
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: _selectedIndex,
+        selectedItemColor: Colors.red,
+        onTap: (int index){
+          setState(() {
+            _selectedIndex = index;
+          });
+        },
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            title: Text('Home'),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.search),
+            title: Text('Discover'),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.account_balance),
+            title: Text('Account'),
+          ),
+        ],
+      ),
     );
   }
 }

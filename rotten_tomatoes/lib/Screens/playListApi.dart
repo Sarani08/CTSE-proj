@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'PlayList.dart';
 
 class PlayListApi {
-  String collectionName = "PlayList";
+  String collectionName = "Preference";
   PlayList curPlayList;
   bool isEditing = false;
 
@@ -10,8 +10,8 @@ class PlayListApi {
     return Firestore.instance.collection(collectionName).snapshots();
   }
 
-  addToList(String url) {
-    PlayList playlist = PlayList(url: url);
+  addToList(String title, int critics, int url, String avatar) {
+    PlayList playlist = new PlayList(title, critics, url,avatar);
     try {
       Firestore.instance.runTransaction(
             (Transaction transaction) async {
