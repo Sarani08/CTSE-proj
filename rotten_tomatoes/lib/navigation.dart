@@ -24,4 +24,8 @@ class MyNavigator {
   static void goToRegister(BuildContext context){
     Navigator.pushNamed(context, "/register");
   }
+
+  static void goToMovieDtails(BuildContext context){
+    Navigator.pushNamed(context, "/movieDetails");
+  }
 }
