@@ -3,6 +3,8 @@ import 'package:http/http.dart' as http;
 import 'dart:async';
 import 'dart:convert';
 import 'movieDetailsUI.dart';
+import 'package:google_fonts/google_fonts.dart';
+import '../navigation.dart';
 
 class MovieHomeUI extends StatefulWidget {
   @override
@@ -32,6 +34,21 @@ class _MovieHomeUIState extends State<MovieHomeUI> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+       appBar: AppBar(
+        backgroundColor: Colors.red,
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.help_outline),
+            onPressed: () {
+              MyNavigator.goToHelp(context);
+            },
+          ),
+        ],
+        title: Text(
+         'Home',
+          style: GoogleFonts.pacifico(),
+        ),
+      ),
       body: ListView.builder(
           padding: const EdgeInsets.all(10.0) ,
           itemCount: userData == null ? 0 : userData.length,
