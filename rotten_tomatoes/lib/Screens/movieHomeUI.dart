@@ -34,7 +34,7 @@ class _MovieHomeUIState extends State<MovieHomeUI> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-       appBar: AppBar(
+      appBar: AppBar(
         backgroundColor: Colors.red,
         actions: <Widget>[
           IconButton(
@@ -45,55 +45,52 @@ class _MovieHomeUIState extends State<MovieHomeUI> {
           ),
         ],
         title: Text(
-         'Home',
+          'Home',
           style: GoogleFonts.pacifico(),
         ),
       ),
       body: ListView.builder(
-          padding: const EdgeInsets.all(10.0) ,
-          itemCount: userData == null ? 0 : userData.length,
-          itemBuilder: (BuildContext context, int index) {
-              return new GestureDetector(
-                child: new Card(
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      ListTile(
-                        title: Text("${userData[index]["display_title"]}",
-                            style: TextStyle(fontWeight: FontWeight.w500)),
-                        subtitle: Text("${userData[index]["headline"]}"),
-                        trailing: Text("${userData[index]["critics_pick"]}", style: TextStyle(color: Colors.red),),
-                        leading: Image.network(userData[index]["multimedia"]["src"]),
-                                              
-                      ),          
-                    ],),
-                ),
+        padding: const EdgeInsets.all(10.0) ,
+        itemCount: userData == null ? 0 : userData.length,
+        itemBuilder: (BuildContext context, int index) {
+          return new GestureDetector(
+            child: new Card(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  ListTile(
+                    title: Text("${userData[index]["display_title"]}",
+                        style: TextStyle(fontWeight: FontWeight.w500)),
+                    subtitle: Text("${userData[index]["headline"]}"),
+                    trailing: Text("${userData[index]["critics_pick"]}", style: TextStyle(color: Colors.red),),
+                    leading: Image.network(userData[index]["multimedia"]["src"]),
 
-                onTap: () {
+                  ),
+                ],),
+            ),
 
-
-                  String title = userData[index]["display_title"];
-                  String imageURl = userData[index]["multimedia"]["src"];
-                  int critics = userData[index]["critics_pick"];
-                  String summary = userData[index]["summary_short"];
-                  String date = userData[index]["publication_date"];
-                  String author = userData[index]["byline"];
+            onTap: () {
 
 
-                  Navigator.push(context, 
+              String title = userData[index]["display_title"];
+              String imageURl = userData[index]["multimedia"]["src"];
+              int critics = userData[index]["critics_pick"];
+              String summary = userData[index]["summary_short"];
+              String date = userData[index]["publication_date"];
+              String author = userData[index]["byline"];
+              int id = index;
+
+
+              Navigator.push(context,
                   new MaterialPageRoute(builder: (context){
-                      return new MovieDetailUI(imageURl ,title,summary,date,author,critics);
+                    return new MovieDetailUI(imageURl ,title,summary,date,author,critics,id);
                   }));
-                  
-                  
-                 // api.addToList(userData[index]["display_title"],userData[index]["multimedia"]["src"]);
-                  // MyNavigator.goToPlayList(context);
-                },
-              );
-          },
+            },
+          );
+        },
       ),
     );
   }
-  
+
 }

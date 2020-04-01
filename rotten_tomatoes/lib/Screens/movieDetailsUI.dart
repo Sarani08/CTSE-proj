@@ -12,10 +12,11 @@ class MovieDetailUI extends StatelessWidget {
   int criticsPick;
   String date;
   String author;
+  int id;
   PlayListApi api = new PlayListApi();
 
 
-  MovieDetailUI(this.imageURL,this.movieName,this.summary,this.date,this.author,this.criticsPick);
+  MovieDetailUI(this.imageURL,this.movieName,this.summary,this.date,this.author,this.criticsPick, this.id);
   Color mainColor = const Color(0xff3C3261);
 
   @override
@@ -78,12 +79,12 @@ class MovieDetailUI extends StatelessWidget {
                     children: <Widget>[
                       new Expanded(
                           child: new Text(
-                        movieName,
-                        style: new TextStyle(
-                            color: Colors.white,
-                            fontSize: 30.0,
-                            fontFamily: 'Arvo'),
-                      )),
+                            movieName,
+                            style: new TextStyle(
+                                color: Colors.white,
+                                fontSize: 30.0,
+                                fontFamily: 'Arvo'),
+                          )),
                       new Text(
                         'Critics: $criticsPick',
                         style: new TextStyle(
@@ -103,11 +104,11 @@ class MovieDetailUI extends StatelessWidget {
                   alignment: Alignment.bottomRight,
                   child: FloatingActionButton(
                     backgroundColor: Colors.red,
-                     child: Icon(
+                    child: Icon(
                       Icons.add,
-                      ),
+                    ),
                     onPressed: (){
-                      api.addToList(movieName,imageURL);
+                      api.addToList(movieName,criticsPick,id,imageURL);
                       MyNavigator.goToPlayList(context);
                     },
                     tooltip: 'Add to preferences',
