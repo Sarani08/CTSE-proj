@@ -10,7 +10,7 @@ class MyNavigator {
   }
 
   static void goToHelp(BuildContext context) {
-    Navigator.pushNamed(context, "/help");
+    Navigator.pushNamed(context, "/helpUI");
   }
 
   static void goToSearch(BuildContext context) {
@@ -28,4 +28,13 @@ class MyNavigator {
   static void goToMovieDtails(BuildContext context){
     Navigator.pushNamed(context, "/movieDetails");
   }
+
+  static void goToUserProfile(BuildContext context){
+    Navigator.pushNamed(context, "/userProfile");
+  }
+
+  static void goToAboutUs(BuildContext context){
+    Navigator.pushNamed(context, "/aboutUs");
+  }
+
 }

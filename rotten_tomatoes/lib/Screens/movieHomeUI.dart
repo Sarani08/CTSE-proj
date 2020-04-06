@@ -84,12 +84,18 @@ class _MovieHomeUIState extends State<MovieHomeUI> {
               },
             ),
             ListTile(
+              title: Text('My Userprof'),
+              onTap: () {
+                MyNavigator.goToUserProfile(context);
+              },
+            ),
+            ListTile(
               title: Text('About Us'),
               onTap: () {
                 // Update the state of the app
                 // ...
                 // Then close the drawer
-                Navigator.pop(context);
+                MyNavigator.goToAboutUs(context);
               },
             ),
           ],
