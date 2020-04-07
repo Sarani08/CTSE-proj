@@ -19,7 +19,7 @@ var routes = <String, WidgetBuilder>{
   "/home": (BuildContext context) => HomeScreen(),
   "/playList": (context) => PlayListView(),
   "/loginRegisterWelcome": (context) => LoginSignUPWelcome(),
-  "/search" : (context) => SearchUI(),
+  "/search" : (context) => Search(),
   "/register" : (context) => SignupPage(),
   "/userProfile" : (context) => UserProfile(),
   "/aboutUs" : (context) => About(),
@@ -27,8 +27,7 @@ var routes = <String, WidgetBuilder>{
 };
 
 void main() {
-  WidgetsFlutterBinding.ensureInitialized();
-
+WidgetsFlutterBinding.ensureInitialized();
  runApp(
   StreamProvider<User>.value(
     value: AuthService().user,

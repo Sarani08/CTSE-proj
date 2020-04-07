@@ -1,8 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:groovin_material_icons/groovin_material_icons.dart';
-import 'package:url_launcher/url_launcher.dart' as url_launcher;
-import 'package:url_launcher/url_launcher.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../navigation.dart';
 
@@ -97,7 +93,6 @@ class Help extends StatelessWidget {
                         color: Colors.grey[800],
                         fontSize: 14
                       )) ,
-                  onTap: () => _launchURL(),
                 ),
                 Divider(color: Colors.black,endIndent: 10,indent: 10,),
                 ListTile(
@@ -112,7 +107,6 @@ class Help extends StatelessWidget {
                         color: Colors.grey[800],
                         fontSize: 14
                       )) ,
-                  onTap: () => _launchURL(),
                 ),
                 Divider(color: Colors.black,endIndent: 10,indent: 10,),
                 ListTile(
@@ -127,7 +121,6 @@ class Help extends StatelessWidget {
                         color: Colors.grey[800],
                         fontSize: 14
                       )) ,
-                  onTap: () => _launchURL(),
                 ),
                 Divider(color: Colors.black,endIndent: 10,indent: 10,),
                 SizedBox(
@@ -138,13 +131,4 @@ class Help extends StatelessWidget {
           ],
         ),
       );
-}
-
-_launchURL() async {
-  const url = 'https://github.com/Sarani08/CTSE-proj';
-  if (await canLaunch(url)) {
-    await launch(url);
-  } else {
-    throw 'Could not launch $url';
-  }
 }

@@ -15,7 +15,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   int _selectedIndex = 0;
   final _pageOptions = [
     MovieHomeUI(),
-    SearchUI(),
+    Search(),
     LoginSignUPWelcome()
   ];
 
