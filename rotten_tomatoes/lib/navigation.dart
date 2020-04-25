@@ -21,17 +21,9 @@ class MyNavigator {
   static void goToLoginRegisterWelcome(BuildContext context, Auth auth) {
     Navigator.pushNamed(context, "/loginRegisterWelcome", arguments : auth);
   } 
-
-  static void goToRegister(BuildContext context){
-    Navigator.pushNamed(context, "/register");
-  }
-
+  
   static void goToMovieDtails(BuildContext context){
     Navigator.pushNamed(context, "/movieDetails");
-  }
-
-  static void goToUserProfile(BuildContext context){
-    Navigator.pushNamed(context, "/userProfile");
   }
 
   static void goToAboutUs(BuildContext context){

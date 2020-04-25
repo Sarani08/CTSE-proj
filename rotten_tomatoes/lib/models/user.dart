@@ -2,19 +2,24 @@ class User {
   final String id;
   final String fullName;
   String email;
-  final String username;
-  User({this.id, this.fullName, this.email, this.username});
-  User.fromData(Map<String, dynamic> data)
-      : id = data['id'],
-        fullName = data['fullName'],
-        email = data['email'],
-        username = data['username'];
-  Map<String, dynamic> toJson() {
+  String username;
+  final String bio;
+
+  User({this.id, this.fullName, this.email, this.username, this.bio});
+  User.fromMap(Map snapshot,String id) :
+        id = id ?? '',
+        fullName = snapshot['fullName'] ?? '',
+        email = snapshot['email'] ?? '',
+        username = snapshot['username'] ?? '',
+        bio = snapshot['bio'] ?? '';
+
+  toJson() {
     return {
       'id': id,
       'fullName': fullName,
       'email': email,
       'username': username,
+      'bio' : bio,
     };
   }
 }

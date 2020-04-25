@@ -6,7 +6,6 @@ import 'home_screen.dart';
 import 'splash_screen.dart';
 import 'Screens/playListPage.dart';
 import 'Screens/searchUI.dart';
-import 'Screens/RegisterUI.dart';
 import 'package:provider/provider.dart';
 import 'Services/auth.dart';
 import 'models/user.dart';
@@ -19,7 +18,6 @@ var routes = <String, WidgetBuilder>{
   "/home": (BuildContext context) => HomeScreen(),
   "/playList": (context) => PlayListView(),
   "/search" : (context) => Search(),
-  "/register" : (context) => SignupPage(),
   "/userProfile" : (context) => UserProfile(),
   "/aboutUs" : (context) => About(),
   "/helpUI" : (context) => Help(),
