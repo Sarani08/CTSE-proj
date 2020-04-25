@@ -21,6 +21,8 @@ class RootPage extends StatefulWidget {
 class _RootPageState extends State<RootPage> {
   AuthStatus authStatus = AuthStatus.NOT_DETERMINED;
   String _userId = "";
+  String _email = ""; 
+
 
   @override
   void initState() {
@@ -29,6 +31,7 @@ class _RootPageState extends State<RootPage> {
       setState(() {
         if (user != null) {
           _userId = user?.uid;
+          _email = user?.email;
         }
         authStatus =
             user?.uid == null ? AuthStatus.NOT_LOGGED_IN : AuthStatus.LOGGED_IN;
@@ -40,6 +43,7 @@ class _RootPageState extends State<RootPage> {
     widget.auth.getCurrentUser().then((user) {
       setState(() {
         _userId = user.uid.toString();
+        _email = user?.email;
       });
     });
     setState(() {
@@ -78,8 +82,9 @@ class _RootPageState extends State<RootPage> {
           return new UserProfile(
             userId: _userId,
             auth: widget.auth,
+            email: _email,
             onSignedOut: _onSignedOut,
-          );
+          ); 
         } else
           return progressScreenWidget();
         break;

@@ -13,7 +13,13 @@ class CommonDrawer extends StatelessWidget {
           padding: EdgeInsets.zero,
           children: <Widget>[
             DrawerHeader(
-              child: Text('Drawer Header'),
+             // child: Text('Drawer Header'),
+              child: Image.asset(
+                    'assets/logo.JPG',
+                    alignment: Alignment.center,
+                    height: 150.0,
+                    width: 150.0,
+                  ),
               decoration: BoxDecoration(
                 color: Colors.red,
               ),
@@ -25,7 +31,7 @@ class CommonDrawer extends StatelessWidget {
                 // ...
                 // Then close the drawer
                 MyNavigator.goToHome(context);
-              },
+              },                            
             ),
             ListTile(
               title: Text('My Account'),
@@ -33,19 +39,13 @@ class CommonDrawer extends StatelessWidget {
                 // Update the state of the app
                 // ...
                 // Then close the drawer
-                MyNavigator.goToLoginRegisterWelcome(context, _auth);
+                MyNavigator.goToRoot(context, new Auth());
               },
             ),
             ListTile(
               title: Text('My PlayList'),
               onTap: () {
                 MyNavigator.goToPlayList(context);
-              },
-            ),
-            ListTile(
-              title: Text('My Userprof'),
-              onTap: () {
-                MyNavigator.goToUserProfile(context);
               },
             ),
             ListTile(
