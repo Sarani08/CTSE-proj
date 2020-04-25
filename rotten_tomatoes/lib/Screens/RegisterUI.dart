@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../navigation.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../Services/auth.dart';
+import './drawer.dart';
 
 class SignupPage extends StatefulWidget {
   @override
@@ -10,14 +11,60 @@ class SignupPage extends StatefulWidget {
 
 class _SignupPageState extends State<SignupPage> {
 
-  final AuthService _auth = AuthService();
+  _SignupPageState({this.auth});
+  BaseAuth auth;
   final _formKey = GlobalKey<FormState>();
   String error = '';
+  String _errorMessage;
+  bool _isLoading;
+
 
   String name;
   String email;
   String password;
   String username;
+
+  bool validateAndSave() {
+    final form =  _formKey.currentState;
+    if(form.validate()) {
+      form.save();
+      return true;
+    }else {
+      return false;
+    }
+  }
+
+   void validateAndSubmit() async {
+    //     setState(() {
+    //   _errorMessage = "";
+    //   _isLoading = true;
+    // });
+    // if (validateAndSave()) {
+    //   String userId = "";
+    //   try {
+    //     userId = await widget.aut
+    //     print('Signed in: $userId');
+    //     setState(() {
+    //       _isLoading = false;
+    //     });
+
+    //     if (userId.length > 0 && userId != null) {
+    //       widget.loginCallback();
+    //     }
+    //   } catch (e) {
+    //     print('Error: $e');
+    //     setState(() {
+    //       _isLoading = false;
+    //       _errorMessage = e.message;
+    //       _formKey.currentState.reset();
+    //     });
+    //   }
+    // }
+   }
+
+
+
+
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
@@ -37,59 +84,9 @@ class _SignupPageState extends State<SignupPage> {
           style: GoogleFonts.pacifico(),
         ),
       ),
-      drawer: Drawer(
-        child: ListView(
-          padding: EdgeInsets.zero,
-          children: <Widget>[
-            DrawerHeader(
-              child: Text('Drawer Header'),
-              decoration: BoxDecoration(
-                color: Colors.red,
-              ),
-            ),
-            ListTile(
-              title: Text('Home'),
-              onTap: () {
-                // Update the state of the app
-                // ...
-                // Then close the drawer
-                MyNavigator.goToHome(context);
-              },
-            ),
-            ListTile(
-              title: Text('My Account'),
-              onTap: () {
-                // Update the state of the app
-                // ...
-                // Then close the drawer
-                MyNavigator.goToLoginRegisterWelcome(context);
-              },
-            ),
-            ListTile(
-              title: Text('My PlayList'),
-              onTap: () {
-                MyNavigator.goToPlayList(context);
-              },
-            ),
-            ListTile(
-              title: Text('My Userprof'),
-              onTap: () {
-                MyNavigator.goToUserProfile(context);
-              },
-            ),
-            ListTile(
-              title: Text('About Us'),
-              onTap: () {
-                // Update the state of the app
-                // ...
-                // Then close the drawer
-                MyNavigator.goToAboutUs(context);
-              },
-            ),
-          ],
-        ),
-      ), 
-        body: Column(
+      drawer: CommonDrawer(), 
+        body: new Container(
+          child: ListView(
           children: 
           <Widget>[
           Container(
@@ -191,16 +188,8 @@ class _SignupPageState extends State<SignupPage> {
                           elevation: 7.0,
                           child: InkWell(
                             onTap: ()async{
-                             if(_formKey.currentState.validate()){
-                                dynamic result = await _auth.registerWithEmailAndPassword(email, password);
-                                if(result == null) {
-                                  setState(() {
-                                    error = 'Please supply a valid email';
-                                  });
-                                }else {
-                                  MyNavigator.goToHome(context);
-                                }
-                              } 
+                            validateAndSubmit();
+                            _formKey.currentState.reset();
                             },
                             child: Center(
                               child: Text(
@@ -243,6 +232,6 @@ class _SignupPageState extends State<SignupPage> {
                   ],
                 ),
               )),
-        ]));
+        ])));
   }
 }
