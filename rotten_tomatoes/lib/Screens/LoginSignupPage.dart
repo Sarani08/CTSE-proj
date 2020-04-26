@@ -22,6 +22,7 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
   final _formKey = new GlobalKey<FormState>();
   String _email;
   String _password;
+  String _confirmpassword;
   String _name;
   String _username;
 
@@ -107,7 +108,9 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
         children: <Widget>[
           _emailWidget(),
           _passwordWidget(),
-          _confirmPasswordWidget(),
+          _formMode == FormMode.SIGNUP ? _confirmPasswordWidget() : SizedBox(
+                height: 15.0,
+              ),
         ],
       ),
     );
@@ -166,7 +169,7 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
         obscureText: true,
         autofocus: false,
         decoration: new InputDecoration(
-            labelText: 'Confirm Password',
+            labelText: 'CONFIRM PASSWORD',
             labelStyle: TextStyle(
                 fontFamily: 'Montserrat',
                 fontWeight: FontWeight.bold,
@@ -175,8 +178,8 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
               Icons.lock,
               color: Colors.grey,
             )),
-        validator: (value) => confirmPassword(value),
-        onSaved: (value) => _password = value.trim(),
+        validator: (value) => value.isEmpty ? 'Confirm Password cannot be empty' : null,
+        onSaved: (value) => _confirmpassword = value.trim(),
       ),
     );
   }
@@ -213,13 +216,12 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
   }
 
   //checks the password given is both equal
-  confirmPassword(value){
-    if(_password == value){
+  confirmPassword(){
+    if(_confirmpassword == _password){
       return true;
     }
     else{
       String message = "paswords don't match";
-      message = value.toString()+_password.toString();
       showToast(message);
       return false;
     }
@@ -271,7 +273,9 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
         if (_formMode == FormMode.LOGIN) {
           userId = await widget.auth.signIn(_email, _password);
         } else {
+          if(confirmPassword()){
           userId = await widget.auth.signUp(_email, _password);
+          }
         }
         setState(() {
           _isLoading = false;
