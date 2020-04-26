@@ -50,7 +50,7 @@ class _MovieHomeUIState extends State<MovieHomeUI> {
           style: GoogleFonts.pacifico(),
         ),
       ),
-      drawer:   CommonDrawer(),    
+      drawer:   CommonDrawer(),
       body: ListView.builder(
         padding: const EdgeInsets.all(10.0) ,
         itemCount: userData == null ? 0 : userData.length,
