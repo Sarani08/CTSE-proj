@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:rotten_tomatoes/Screens/drawer.dart';
 import 'package:rotten_tomatoes/Services/auth.dart';
 import 'package:rotten_tomatoes/navigation.dart';
 
@@ -35,7 +34,15 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
           IconButton(
             icon: Icon(Icons.help_outline),
             onPressed: () {
+              //navigate to help page
               MyNavigator.goToHelp(context);
+            },
+          ),
+          IconButton(
+            icon: Icon(Icons.info_outline),
+            onPressed: () {
+              //navigate to app information page
+              MyNavigator.goToAboutUs(context);
             },
           ),
         ],
@@ -43,7 +50,6 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
             ? new Text('Login', style: GoogleFonts.pacifico())
             : new Text('Create Account', style: GoogleFonts.pacifico()),
       ),
-      drawer: CommonDrawer(),
       body: new Container(
         child: ListView(
         children: <Widget>[     

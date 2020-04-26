@@ -6,10 +6,8 @@ import 'package:image_picker/image_picker.dart';
 import 'package:path/path.dart';
 import 'package:rotten_tomatoes/Services/auth.dart';
 import 'package:rotten_tomatoes/models/user.dart';
-import 'dart:ui' as ui;
 import '../navigation.dart';
 import 'package:google_fonts/google_fonts.dart';
-import './drawer.dart';
 
 
 class UserProfile extends StatefulWidget {
@@ -82,7 +80,6 @@ class _UserProfileState extends State<UserProfile> {
               onPressed: _signOut)
         ],
       ),
-      drawer: CommonDrawer(),
       body: Center(
             child: new Column(
               children: <Widget>[

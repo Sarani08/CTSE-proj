@@ -3,6 +3,7 @@ import 'package:rotten_tomatoes/Screens/root_page.dart';
 import 'package:rotten_tomatoes/Services/auth.dart';
 import 'Screens/movieHomeUI.dart';
 import 'Screens/searchUI.dart';
+import 'Screens/playListPage.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -15,7 +16,8 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   final _pageOptions = [
     MovieHomeUI(),
     Search(),
-    RootPage(auth: new Auth())
+    PlayListView(),
+    RootPage(auth: new Auth()),
   ];
 
   @override
@@ -37,6 +39,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _selectedIndex,
         selectedItemColor: Colors.red,
+        unselectedItemColor: Colors.black26,
         onTap: (int index){
           setState(() {
             _selectedIndex = index;
@@ -52,8 +55,12 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
             title: Text('Discover'),
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.account_balance),
-            title: Text('Account'),
+            icon: Icon(Icons.playlist_play),
+            title: Text('PlayList'),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.account_circle),
+            title: Text('User'),
           ),
         ],
       ),

@@ -147,65 +147,21 @@ class PlayListState extends State<PlayListView> {
           IconButton(
             icon: Icon(Icons.help_outline),
             onPressed: () {
+              //navigate to help page
               MyNavigator.goToHelp(context);
+            },
+          ),
+          IconButton(
+            icon: Icon(Icons.info_outline),
+            onPressed: () {
+              //navigate to app information page
+              MyNavigator.goToAboutUs(context);
             },
           ),
         ],
         title: Text(
           "Preferences",
           style: GoogleFonts.pacifico(),
-        ),
-      ),
-      drawer: Drawer(
-        child: ListView(
-          padding: EdgeInsets.zero,
-          children: <Widget>[
-            DrawerHeader(
-              child: Text('Drawer Header'),
-              decoration: BoxDecoration(
-                color: Colors.red,
-              ),
-            ),
-            ListTile(
-              title: Text('Home'),
-              onTap: () {
-                // Update the state of the app
-                // ...
-                // Then close the drawer
-                MyNavigator.goToHome(context);
-              },
-            ),
-            ListTile(
-              title: Text('My Account'),
-              onTap: () {
-                // Update the state of the app
-                // ...
-                // Then close the drawer
-                MyNavigator.goToLoginRegisterWelcome(context);
-              },
-            ),
-            ListTile(
-              title: Text('My PlayList'),
-              onTap: () {
-                MyNavigator.goToPlayList(context);
-              },
-            ),
-            ListTile(
-              title: Text('My Userprof'),
-              onTap: () {
-                MyNavigator.goToUserProfile(context);
-              },
-            ),
-            ListTile(
-              title: Text('About Us'),
-              onTap: () {
-                // Update the state of the app
-                // ...
-                // Then close the drawer
-                MyNavigator.goToAboutUs(context);
-              },
-            ),
-          ],
         ),
       ),
       body: Container(
