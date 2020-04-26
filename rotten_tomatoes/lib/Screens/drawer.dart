@@ -17,8 +17,8 @@ class CommonDrawer extends StatelessWidget {
               child: Image.asset(
                     'assets/logo.JPG',
                     alignment: Alignment.center,
-                    height: 150.0,
-                    width: 150.0,
+                    height: 300.0,
+                    width: 300.0,
                   ),
               decoration: BoxDecoration(
                 color: Colors.red,
