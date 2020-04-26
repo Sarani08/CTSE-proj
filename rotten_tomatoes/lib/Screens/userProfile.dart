@@ -1,4 +1,9 @@
+import 'package:file/file.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:path/path.dart';
 import 'package:rotten_tomatoes/Services/auth.dart';
 import 'package:rotten_tomatoes/models/user.dart';
 import 'dart:ui' as ui;
@@ -33,6 +38,7 @@ class _UserProfileState extends State<UserProfile> {
   String _id;
   String _username;
   User user;
+  File _image;
 
   @override
   void initState(){
@@ -40,13 +46,32 @@ class _UserProfileState extends State<UserProfile> {
     List usernames = _email.split("@");
     _username = usernames[0].toString().toUpperCase(); 
 
-    user.email = _email;
-    user.username = _username;
     super.initState();  
   }
 
   @override
   Widget build(BuildContext context) {
+
+    Future getImage() async {
+      var image = await ImagePicker.pickImage(source: ImageSource.gallery);
+ 
+      setState(() {
+        _image = image;
+          print('Image Path $_image');
+      });
+    }
+
+    Future uploadPic(BuildContext context) async{
+      String fileName = basename(_image.path);
+       StorageReference firebaseStorageRef = FirebaseStorage.instance.ref().child(fileName);
+       StorageUploadTask uploadTask = firebaseStorageRef.putFile(_image);
+       StorageTaskSnapshot taskSnapshot=await uploadTask.onComplete;
+       setState(() {
+          print("Profile Picture uploaded");
+          Scaffold.of(context).showSnackBar(SnackBar(content: Text('Profile Picture Uploaded')));
+       });
+    }
+
     return new Scaffold( 
       appBar: new AppBar(
         title: new Text('$_email', style: GoogleFonts.pacifico(),),
@@ -61,12 +86,53 @@ class _UserProfileState extends State<UserProfile> {
       body: Center(
             child: new Column(
               children: <Widget>[
-                new SizedBox(height: 12,),
                 new SizedBox(height: 25.0,),
-                new Text('Welcome $_username ', style: new TextStyle(fontWeight: FontWeight.bold, fontSize:20, color: Colors.black,),),
+                Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Align(
+                    alignment: Alignment.center,
+                    child: CircleAvatar(
+                      radius: 100,
+                      backgroundColor: Colors.red,
+                      child: ClipOval(
+                        child: new SizedBox(
+                          width: 180.0,
+                          height: 180.0,
+                          child: (_image!=null)?Image.file(
+                            _image,
+                            fit: BoxFit.fill,
+                          ):Image.network(
+                            "https://www.ecopetit.cat/wpic/mpic/51-515283_girls-for-facebook-profile-wallpaper-photo-on-hd.jpg",
+                            fit: BoxFit.fill,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(top: 150.0),
+                    child: IconButton(
+                      icon: Icon(
+                        FontAwesomeIcons.camera,
+                        size: 20.0,
+                      ),
+                      onPressed: () {
+                        getImage();
+                      },
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: 20.0,
+              ),
                 new Divider(height: 30,color: Colors.white,),
                 new Divider(height: 30,color: Colors.white),
                 new Padding(padding: new EdgeInsets.only(left: 8, right: 8),
+
+
+                
                  child: new FlatButton(onPressed: (){
                       MyNavigator.goToPlayList(context);
                  },

@@ -64,8 +64,14 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
                       ,
                     ],
                   ),
-                ),     
+                ),
+          SizedBox(
+                height: 50.0,
+              ),     
           formWidget(),
+          SizedBox(
+                height: 30.0,
+              ),  
           loginButtonWidget(),
           secondaryButton(),
           errorWidget(),
@@ -89,59 +95,9 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
       key: _formKey,
       child: Column(
         children: <Widget>[
-          _formMode == FormMode.SIGNUP
-              ? _nameWidget() : SizedBox(height: 20.0),
           _emailWidget(),
           _passwordWidget(),
-          _formMode == FormMode.SIGNUP
-              ? _usernameWidget() : SizedBox(height: 20.0),
         ],
-      ),
-    );
-  }
-  
-  Widget _nameWidget() {
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(0.0, 5.0, 0.0, 0.0),
-      child: TextFormField(
-        maxLines: 1,
-        keyboardType: TextInputType.text,
-        autofocus: false,
-        decoration: new InputDecoration(
-            labelText: 'FULLNAME',
-            labelStyle: TextStyle(
-                fontFamily: 'Montserrat',
-                fontWeight: FontWeight.bold,
-                color: Colors.grey),
-            icon: new Icon(
-              Icons.person_pin,
-              color: Colors.grey,
-            )),
-        validator: (value) => value.isEmpty ? 'Full name cannot be empty' : null,
-        onSaved: (value) => _name,
-      ),
-    );
-  }
-
-    Widget _usernameWidget() {
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(0.0, 5.0, 0.0, 0.0),
-      child: TextFormField(
-        maxLines: 1,
-        keyboardType: TextInputType.text,
-        autofocus: false,
-        decoration: new InputDecoration(
-            labelText: 'USERNAME',
-            labelStyle: TextStyle(
-                fontFamily: 'Montserrat',
-                fontWeight: FontWeight.bold,
-                color: Colors.grey),
-            icon: new Icon(
-              Icons.person_outline,
-              color: Colors.grey,
-            )),
-        validator: (value) => value.isEmpty ? 'Username cannot be empty' : null,
-        onSaved: (value) => _username,
       ),
     );
   }
