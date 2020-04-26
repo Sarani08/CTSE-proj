@@ -36,6 +36,10 @@ dependencies:
   groovin_material_icons: ^1.1.6
   url_launcher: ^5.4.2
   get_it: ^4.0.1
+  image_picker: ^0.6.5+2
+  firebase_storage: ^3.1.5
+  file: ^5.1.0
+  path: ^1.6.4
 
 
   # The following adds the Cupertino Icons font to your application.
