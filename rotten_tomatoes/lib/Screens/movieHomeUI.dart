@@ -5,7 +5,6 @@ import 'dart:convert';
 import 'movieDetailsUI.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../navigation.dart';
-import './drawer.dart';
 
 class MovieHomeUI extends StatefulWidget {
   @override
@@ -41,7 +40,15 @@ class _MovieHomeUIState extends State<MovieHomeUI> {
           IconButton(
             icon: Icon(Icons.help_outline),
             onPressed: () {
+              //navigate to help page
               MyNavigator.goToHelp(context);
+            },
+          ),
+          IconButton(
+            icon: Icon(Icons.info_outline),
+            onPressed: () {
+              //navigate to app information page
+              MyNavigator.goToAboutUs(context);
             },
           ),
         ],
@@ -50,7 +57,6 @@ class _MovieHomeUIState extends State<MovieHomeUI> {
           style: GoogleFonts.pacifico(),
         ),
       ),
-      drawer:   CommonDrawer(),
       body: ListView.builder(
         padding: const EdgeInsets.all(10.0) ,
         itemCount: userData == null ? 0 : userData.length,

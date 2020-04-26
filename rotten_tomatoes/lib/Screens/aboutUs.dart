@@ -1,31 +1,36 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:groovin_material_icons/groovin_material_icons.dart';
 import 'package:url_launcher/url_launcher.dart' as url_launcher;
 import 'package:url_launcher/url_launcher.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../navigation.dart';
-import './drawer.dart';
 
 class About extends StatelessWidget {
   @override
   Widget build(BuildContext context) => new Scaffold(
     appBar: AppBar(
         backgroundColor: Colors.red,
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.help_outline),
-            onPressed: () {
-              MyNavigator.goToHelp(context);
-            },
-          ),
-        ],
+      actions: <Widget>[
+        IconButton(
+          icon: Icon(Icons.help_outline),
+          onPressed: () {
+            //navigate to help page
+            MyNavigator.goToHelp(context);
+          },
+        ),
+        IconButton(
+          icon: Icon(Icons.info_outline),
+          onPressed: () {
+            //navigate to app information page
+            MyNavigator.goToAboutUs(context);
+          },
+        ),
+      ],
         title: Text(
           'About Us',
           style: GoogleFonts.pacifico(),
         ),
       ),
-      drawer: CommonDrawer(),  
         backgroundColor: Colors.white,
         body: ListView(
           children: <Widget>[

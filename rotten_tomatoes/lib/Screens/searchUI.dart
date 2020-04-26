@@ -4,7 +4,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'movieDetailsUI.dart';
-import './drawer.dart';
 
 class Search extends StatefulWidget {
   @override
@@ -51,7 +50,15 @@ class _SearchState extends State<Search> {
           IconButton(
             icon: Icon(Icons.help_outline),
             onPressed: () {
+              //navigate to help page
               MyNavigator.goToHelp(context);
+            },
+          ),
+          IconButton(
+            icon: Icon(Icons.info_outline),
+            onPressed: () {
+              //navigate to app information page
+              MyNavigator.goToAboutUs(context);
             },
           ),
         ],
@@ -60,7 +67,6 @@ class _SearchState extends State<Search> {
           style: GoogleFonts.pacifico(),
         ),
       ),
-      drawer: CommonDrawer(),
       body: Container(
         padding: const EdgeInsets.all(16.0),
         child: Column(
