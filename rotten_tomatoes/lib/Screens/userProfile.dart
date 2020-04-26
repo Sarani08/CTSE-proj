@@ -168,14 +168,14 @@ class _UserProfileState extends State<UserProfile> {
                 new Padding(padding: new EdgeInsets.only(left: 8, right: 8),
                 
                  child: new FlatButton(onPressed: (){
-                      MyNavigator.goToPlayList(context);
+                      MyNavigator.goToWatchList(context);
                  },
                   child: new Container(
                     child: new Row(
                     mainAxisAlignment: MainAxisAlignment.center,children: <Widget>[
                       new Icon(Icons.person_add,color: Colors.white, ),
                       new SizedBox(width: 30,),
-                      new Text('My Preferences List', style: new TextStyle(color: Colors.white,))
+                      new Text('My Watch List', style: new TextStyle(color: Colors.white,))
                     ],)),color: Colors.red,),),
               ],
             ),
