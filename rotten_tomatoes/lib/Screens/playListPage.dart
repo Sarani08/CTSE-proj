@@ -90,14 +90,10 @@ class PlayListState extends State<PlayListView> {
               padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
               child: Row(children: <Widget>[
                 IconButton(
-                    icon: new Icon(Icons.edit),
-                    onPressed: () {
-                      // edit
-                    }),
-                IconButton(
                     icon: Icon(Icons.delete),
                     onPressed: () {
-                      // delete
+                      // delete from preference list
+                      api.deleteList(playlist);
                     }),
               ]),
             ),
@@ -158,6 +154,58 @@ class PlayListState extends State<PlayListView> {
         title: Text(
           "Preferences",
           style: GoogleFonts.pacifico(),
+        ),
+      ),
+      drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: <Widget>[
+            DrawerHeader(
+              child: Text('Drawer Header'),
+              decoration: BoxDecoration(
+                color: Colors.red,
+              ),
+            ),
+            ListTile(
+              title: Text('Home'),
+              onTap: () {
+                // Update the state of the app
+                // ...
+                // Then close the drawer
+                MyNavigator.goToHome(context);
+              },
+            ),
+            ListTile(
+              title: Text('My Account'),
+              onTap: () {
+                // Update the state of the app
+                // ...
+                // Then close the drawer
+                MyNavigator.goToLoginRegisterWelcome(context);
+              },
+            ),
+            ListTile(
+              title: Text('My PlayList'),
+              onTap: () {
+                MyNavigator.goToPlayList(context);
+              },
+            ),
+            ListTile(
+              title: Text('My Userprof'),
+              onTap: () {
+                MyNavigator.goToUserProfile(context);
+              },
+            ),
+            ListTile(
+              title: Text('About Us'),
+              onTap: () {
+                // Update the state of the app
+                // ...
+                // Then close the drawer
+                MyNavigator.goToAboutUs(context);
+              },
+            ),
+          ],
         ),
       ),
       body: Container(

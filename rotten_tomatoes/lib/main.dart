@@ -10,7 +10,6 @@ import 'Screens/searchUI.dart';
 import 'Services/auth.dart';
 import 'Screens/userProfile.dart';
 import 'Screens/aboutUs.dart';
-import 'Screens/helpUI.dart';
 
 
 var routes = <String, WidgetBuilder>{
