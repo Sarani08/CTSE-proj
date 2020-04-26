@@ -3,7 +3,7 @@ import 'package:rotten_tomatoes/Screens/root_page.dart';
 import 'package:rotten_tomatoes/Services/auth.dart';
 import 'Screens/movieHomeUI.dart';
 import 'Screens/searchUI.dart';
-import 'Screens/playListPage.dart';
+import 'Screens/watchListPage.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -16,7 +16,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   final _pageOptions = [
     MovieHomeUI(),
     Search(),
-    PlayListView(),
+    WatchListView(),
     RootPage(auth: new Auth()),
   ];
 
@@ -56,7 +56,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.playlist_play),
-            title: Text('PlayList'),
+            title: Text('WatchList'),
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.account_circle),

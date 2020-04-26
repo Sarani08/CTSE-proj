@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'dart:ui' as ui;
 import 'package:google_fonts/google_fonts.dart';
 import 'package:rotten_tomatoes/navigation.dart';
-import 'playListApi.dart';
+import 'watchListApi.dart';
 
 
 class MovieDetailUI extends StatelessWidget {
@@ -13,7 +13,7 @@ class MovieDetailUI extends StatelessWidget {
   String date;
   String author;
   int id;
-  PlayListApi api = new PlayListApi();
+  WatchListApi api = new WatchListApi();
 
 
   MovieDetailUI(this.imageURL,this.movieName,this.summary,this.date,this.author,this.criticsPick, this.id);
@@ -28,7 +28,15 @@ class MovieDetailUI extends StatelessWidget {
           IconButton(
             icon: Icon(Icons.help_outline),
             onPressed: () {
+              //navigate to help page
               MyNavigator.goToHelp(context);
+            },
+          ),
+          IconButton(
+            icon: Icon(Icons.info_outline),
+            onPressed: () {
+              //navigate to app information page
+              MyNavigator.goToAboutUs(context);
             },
           ),
         ],
@@ -108,8 +116,8 @@ class MovieDetailUI extends StatelessWidget {
                       Icons.add,
                     ),
                     onPressed: (){
-                      api.addToList(movieName,criticsPick,id,imageURL);
-                      MyNavigator.goToPlayList(context);
+                      api.addToList(movieName,criticsPick,id,imageURL,0.25);
+                      MyNavigator.goToWatchList(context);
                     },
                     tooltip: 'Add to preferences',
                   ),

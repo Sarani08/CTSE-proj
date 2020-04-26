@@ -40,6 +40,9 @@ dependencies:
   firebase_storage: ^3.1.5
   file: ^5.1.0
   path: ^1.6.4
+  flutter_rating_bar: ^3.0.1+1
+  rflutter_alert: ^1.0.3
+  fluttertoast: ^4.0.1
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -49,10 +52,10 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_launcher_icons: "^0.6.1"
+  flutter_launcher_icons: "^0.7.3"
 
 flutter_icons:
-  android: true
+  android: "launcher_icon"
   ios: true
   image_path: "assets/logo.JPG"
   build_runner: ^1.0.0

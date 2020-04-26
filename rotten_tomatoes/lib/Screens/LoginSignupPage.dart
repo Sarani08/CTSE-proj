@@ -1,7 +1,13 @@
+/*
+      LoginSignUpPage is to handle the user newly registering process and the
+      existing users login process
+*/
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:rotten_tomatoes/Services/auth.dart';
 import 'package:rotten_tomatoes/navigation.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class LoginSignupPage extends StatefulWidget {
   LoginSignupPage({this.auth, this.onSignedIn});
@@ -20,7 +26,6 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
   String _username;
 
 
-  String _errorMessage = "";
   // this will be used to identify the form to show
   FormMode _formMode = FormMode.LOGIN;
   bool _isIos = false;
@@ -80,7 +85,6 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
               ),  
           loginButtonWidget(),
           secondaryButton(),
-          errorWidget(),
           progressWidget()
         ],
       ),
@@ -103,6 +107,7 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
         children: <Widget>[
           _emailWidget(),
           _passwordWidget(),
+          _confirmPasswordWidget(),
         ],
       ),
     );
@@ -152,6 +157,30 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
       ),
     );
   }
+
+  Widget _confirmPasswordWidget() {
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(0.0, 5.0, 0.0, 0.0),
+      child: new TextFormField(
+        maxLines: 1,
+        obscureText: true,
+        autofocus: false,
+        decoration: new InputDecoration(
+            labelText: 'Confirm Password',
+            labelStyle: TextStyle(
+                fontFamily: 'Montserrat',
+                fontWeight: FontWeight.bold,
+                color: Colors.grey),
+            icon: new Icon(
+              Icons.lock,
+              color: Colors.grey,
+            )),
+        validator: (value) => confirmPassword(value),
+        onSaved: (value) => _password = value.trim(),
+      ),
+    );
+  }
+
   Widget loginButtonWidget() {
     return new Padding(
         padding: EdgeInsets.fromLTRB(75.0, 15.0, 75.0, 0.0),
@@ -182,36 +211,46 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
       onPressed: _formMode == FormMode.LOGIN ? showSignupForm : showLoginForm,
     );
   }
+
+  //checks the password given is both equal
+  confirmPassword(value){
+    if(_password == value){
+      return true;
+    }
+    else{
+      String message = "paswords don't match";
+      message = value.toString()+_password.toString();
+      showToast(message);
+      return false;
+    }
+  }
+
+  //
   void showSignupForm() {
     _formKey.currentState.reset();
-    _errorMessage = "";
     setState(() {
       _formMode = FormMode.SIGNUP;
     });
   }
+
+  //
   void showLoginForm() {
     _formKey.currentState.reset();
-    _errorMessage = "";
     setState(() {
       _formMode = FormMode.LOGIN;
     });
   }
-  Widget errorWidget() {
-    if (_errorMessage.length > 0 && _errorMessage != null) {
-      return new Text(
-        _errorMessage,
-        style: TextStyle(
-            fontSize: 13.0,
-            color: Colors.red,
-            height: 1.0,
-            fontWeight: FontWeight.w300),
-      );
-    } else {
-      return new Container(
-        height: 0.0,
-      );
-    }
+
+  //Displays a Toast message when and error is thrown
+  void showToast(value) {
+    Fluttertoast.showToast(
+        msg: value,
+        toastLength: Toast.LENGTH_LONG,
+        gravity: ToastGravity.CENTER,
+        timeInSecForIosWeb: 2);
   }
+
+  //validate the Login and Register Form
   bool _validateAndSave() {
     final form = _formKey.currentState;
     if (form.validate()) {
@@ -220,9 +259,10 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
     }
     return false;
   }
+
+  //validate the Login and Register Form
   _validateAndSubmit() async {
     setState(() {
-      _errorMessage = "";
       _isLoading = true;
     });
     if (_validateAndSave()) {
@@ -243,9 +283,9 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
         setState(() {
           _isLoading = false;
           if (_isIos) {
-            _errorMessage = e.details;
+            showToast(e.details);
           } else
-            _errorMessage = e.message;
+          showToast(e.message);
         });
       }
     } else {

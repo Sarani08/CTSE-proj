@@ -7,8 +7,8 @@
          FlutterApplication and put your custom class here. -->
     <application
             android:name="io.flutter.app.FlutterApplication"
-            android:label="rotten_tomatoes"
-            android:icon="@mipmap/ic_launcher" tools:ignore="GoogleAppIndexingWarning">
+            android:label="Pyxy"
+            android:icon="@mipmap/launcher_icon" tools:ignore="GoogleAppIndexingWarning">
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"
