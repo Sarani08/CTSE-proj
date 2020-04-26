@@ -1,86 +1,68 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import '../navigation.dart';
 
-class SearchUI extends StatefulWidget {
+class DrawerUI extends StatefulWidget {
   @override
-  _SearchUIState createState() => _SearchUIState();
+  _DrawerUIState createState() => _DrawerUIState();
 }
 
 TabController controller;
 
-class _SearchUIState extends State<SearchUI> {
+class _DrawerUIState extends State<DrawerUI> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text(
-            "Search Movie",
-          ),
-        ),
-      body: ListView.builder(
-        itemCount: 8,
-        shrinkWrap: true,
-        itemBuilder: (BuildContext context, int index) => Container(
-          width: MediaQuery.of(context).size.width,
-          padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 5.0),
-          child: Card(
-            elevation: 5.0,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(0.0),
-            ),
-            child: Container(
-              width: MediaQuery.of(context).size.width,
-              padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: <Widget>[
-                      Container(
-                        height: 55.0,
-                          width: 55.0,
-                        child: CircleAvatar(
-//                          backgroundImage: NetworkImage(),
-                        ),
-                      ),
-                      SizedBox(width: 5.0,),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Text('bbb',
-                            style: TextStyle(color: Colors.black,
-                              fontWeight: FontWeight.bold,fontSize: 18.0)
-                          ),
-                          Text('aaa',
-                              style: TextStyle(color: Colors.grey)
-                          )
-                        ],
-                      ),
-                    ],
-                  ),
-                  Container(
-                    alignment: Alignment.center,
-                    padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
-                    child: Row(children: <Widget>[
-                      IconButton(
-                          icon: new Icon(Icons.edit),
-                          onPressed: () {
-                            // edit
-                          }),
-                      IconButton(
-                        icon: Icon(Icons.delete),
-                        onPressed: () {
-                          // delete
-                        }),
-                    ]),
-                  ),
-                ],
+      drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: <Widget>[
+            DrawerHeader(
+              child: Text('Drawer Header'),
+              decoration: BoxDecoration(
+                color: Colors.red,
               ),
             ),
-          ),
+            ListTile(
+              title: Text('Home'),
+              onTap: () {
+                // Update the state of the app
+                // ...
+                // Then close the drawer
+                MyNavigator.goToHome(context);
+              },
+            ),
+            ListTile(
+              title: Text('My Account'),
+              onTap: () {
+                // Update the state of the app
+                // ...
+                // Then close the drawer
+                MyNavigator.goToLoginRegisterWelcome(context);
+              },
+            ),
+            ListTile(
+              title: Text('My PlayList'),
+              onTap: () {
+                MyNavigator.goToPlayList(context);
+              },
+            ),
+            ListTile(
+              title: Text('My Userprof'),
+              onTap: () {
+                MyNavigator.goToUserProfile(context);
+              },
+            ),
+            ListTile(
+              title: Text('About Us'),
+              onTap: () {
+                // Update the state of the app
+                // ...
+                // Then close the drawer
+                MyNavigator.goToAboutUs(context);
+              },
+            ),
+          ],
         ),
       ),
     );
