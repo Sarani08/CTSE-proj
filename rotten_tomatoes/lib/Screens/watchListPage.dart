@@ -1,26 +1,28 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'PlayList.dart';
-import 'PlayListApi.dart';
+import 'watchList.dart';
+import 'watchListApi.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../navigation.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
-class PlayListView extends StatefulWidget {
-  PlayListView() : super();
+class WatchListView extends StatefulWidget {
+  WatchListView() : super();
 
   final String title = "Play List";
 
   @override
-  PlayListState createState() => PlayListState();
+  WatchListState createState() => WatchListState();
 }
 
-class PlayListState extends State<PlayListView> {
-  bool titleField = false;
+class WatchListState extends State<WatchListView> {
   TextEditingController titleController = TextEditingController();
-  String collectionName = "Preference";
-  bool isEditing = false;
-  PlayList curPlay;
-  PlayListApi api = new PlayListApi();
+  String collectionName = "WatchList";
+  WatchList curItem;
+  WatchListApi api = new WatchListApi();
+  double _rating;
 
   Widget buildBody(BuildContext context) {
     return StreamBuilder<QuerySnapshot>(
@@ -45,7 +47,7 @@ class PlayListState extends State<PlayListView> {
   }
 
   Widget buildListItem(BuildContext context, DocumentSnapshot data) {
-    final playlist = PlayList.fromSnapshot(data);
+    final watchlist = WatchList.fromSnapshot(data);
     return Card(
       elevation: 5.0,
       shape: RoundedRectangleBorder(
@@ -66,7 +68,7 @@ class PlayListState extends State<PlayListView> {
                   height: 55.0,
                   width: 55.0,
                   child: CircleAvatar(
-                          backgroundImage: NetworkImage(playlist.avatar),
+                          backgroundImage: NetworkImage(watchlist.avatar),
                       ),
                 ),
                 SizedBox(
@@ -75,12 +77,35 @@ class PlayListState extends State<PlayListView> {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    Text(playlist.title,
+                    Text(watchlist.title,
                         style: TextStyle(
                             color: Colors.black,
                             fontWeight: FontWeight.bold,
                             fontSize: 18.0)),
-                    Text('Critics Pick : ${playlist.critics}', style: TextStyle(color: Colors.grey))
+                    Text('Critics Pick : ${watchlist.critics}',
+                        style: TextStyle(color: Colors.grey)),
+                    RatingBar(
+                      initialRating: watchlist.userRating,
+                      direction: Axis.horizontal,
+                      allowHalfRating: true,
+                      itemSize: 40.0,
+                      itemCount: 5,
+                      glowColor: Colors.pinkAccent,
+                      tapOnlyMode: true,
+                      itemPadding: EdgeInsets.symmetric(horizontal: 0.5),
+                        itemBuilder: (context, _) => Icon(
+                          Icons.favorite,
+                          color: Colors.redAccent,
+                        ),
+                      //rating update when changed
+                      onRatingUpdate: (value){
+                        setState(() {
+                          _rating = value;
+                          //display Toast message
+                          showToast();
+                        });
+                      },
+                    ),
                   ],
                 ),
               ],
@@ -92,8 +117,37 @@ class PlayListState extends State<PlayListView> {
                 IconButton(
                     icon: Icon(Icons.delete),
                     onPressed: () {
-                      // delete from preference list
-                      api.deleteList(playlist);
+                       //Alert box when deleting from items from watchList
+                      Alert(
+                        context: context,
+                        type: AlertType.error,
+                        title: "Remove",
+                        desc: "Are you sure you want to Remove item from WatchList?",
+                        buttons: [
+                          DialogButton(
+                            child: Text(
+                              "Remove",
+                              style: TextStyle(color: Colors.white, fontSize: 20),
+                            ),
+                            onPressed: () {
+                              //delete item
+                              api.deleteList(watchlist);
+                              //navigate back to the current page
+                              Navigator.pop(context);
+                            },
+                            color: Colors.red,
+                          ),
+                          DialogButton(
+                            child: Text(
+                              "Cancel",
+                              style: TextStyle(color: Colors.white, fontSize: 20),
+                            ),
+                            //navigate back to the current page when cancelled
+                            onPressed: () => Navigator.pop(context),
+                            color: Colors.black26,
+                          )
+                        ],
+                      ).show();
                     }),
               ]),
             ),
@@ -103,41 +157,15 @@ class PlayListState extends State<PlayListView> {
     );
   }
 
-  add() {
-    if (isEditing) {
-      // Update
-      api.updateList(curPlay, titleController.text);
-      setState(() {
-        isEditing = false;
-      });
-    }
-    titleController.text = '';
+  // display Toast when updated the rating
+  void showToast() {
+    api.updateList(curItem, _rating);
+    Fluttertoast.showToast(
+        msg: "rating $_rating updated!",
+        toastLength: Toast.LENGTH_LONG,
+        gravity: ToastGravity.CENTER,
+        timeInSecForIosWeb: 1);
   }
-
-  setUpdateUI(PlayList playList) {
-    titleController.text = playList.title;
-    setState(() {
-      titleField = true;
-      isEditing = true;
-      curPlay = playList;
-    });
-  }
-
-  button() {
-    return SizedBox(
-      width: double.infinity,
-      child: OutlineButton(
-        child: Text(isEditing ? "UPDATE" : "ADD"),
-        onPressed: () {
-          add();
-          setState(() {
-            titleField = false;
-          });
-        },
-      ),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -160,7 +188,7 @@ class PlayListState extends State<PlayListView> {
           ),
         ],
         title: Text(
-          "Preferences",
+          "Watch List",
           style: GoogleFonts.pacifico(),
         ),
       ),
@@ -170,23 +198,6 @@ class PlayListState extends State<PlayListView> {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
-            titleField
-                ? Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: <Widget>[
-                      TextFormField(
-                        controller: titleController,
-                        decoration: InputDecoration(
-                            labelText: "Name", hintText: "Change Name"),
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      button(),
-                    ],
-                  )
-                : Container(),
             SizedBox(
               height: 20,
             ),

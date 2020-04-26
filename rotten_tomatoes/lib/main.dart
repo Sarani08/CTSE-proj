@@ -4,7 +4,7 @@ import 'package:rotten_tomatoes/Screens/aboutUs.dart';
 import 'package:rotten_tomatoes/Screens/root_page.dart';
 import 'home_screen.dart';
 import 'splash_screen.dart';
-import 'Screens/playListPage.dart';
+import 'Screens/watchListPage.dart';
 import 'Screens/helpUI.dart';
 import 'Screens/searchUI.dart';
 import 'Services/auth.dart';
@@ -14,7 +14,7 @@ import 'Screens/aboutUs.dart';
 
 var routes = <String, WidgetBuilder>{
   "/home": (BuildContext context) => HomeScreen(),
-  "/playList": (context) => PlayListView(),
+  "/watchList": (context) => WatchListView(),
   "/search" : (context) => Search(),
   "/userProfile" : (context) => UserProfile(),
   "/aboutUs" : (context) => About(),
