@@ -1,34 +1,34 @@
 {
   "project_info": {
-    "project_number": "502226127665",
-    "firebase_url": "https://movielisting-2ad1a.firebaseio.com",
-    "project_id": "movielisting-2ad1a",
-    "storage_bucket": "movielisting-2ad1a.appspot.com"
+    "project_number": "152060926220",
+    "firebase_url": "https://moviedb-73705.firebaseio.com",
+    "project_id": "moviedb-73705",
+    "storage_bucket": "moviedb-73705.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:502226127665:android:5c2c27b5ee82e4d350fe10",
+        "mobilesdk_app_id": "1:152060926220:android:fe21ff391119993dcd5129",
         "android_client_info": {
           "package_name": "com.example.rotten_tomatoes"
         }
       },
       "oauth_client": [
         {
-          "client_id": "502226127665-a4iejkgg639o41j42qfe6mthigi1utbk.apps.googleusercontent.com",
+          "client_id": "152060926220-cbabc5qnsvcddnjjh6v346m75v4quso9.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDdIgN0etpMoHFEBarK5-38ts3ltbfYdIA"
+          "current_key": "AIzaSyAughVx8RlmBKvcy8XhcLIRRvAeoqasHDM"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "502226127665-a4iejkgg639o41j42qfe6mthigi1utbk.apps.googleusercontent.com",
+              "client_id": "152060926220-cbabc5qnsvcddnjjh6v346m75v4quso9.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
