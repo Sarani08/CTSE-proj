@@ -1,27 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../navigation.dart';
-import './drawer.dart';
 
 class Help extends StatelessWidget {
   @override
   Widget build(BuildContext context) => new Scaffold(
     appBar: AppBar(
         backgroundColor: Colors.red,
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.help_outline),
-            onPressed: () {
-              MyNavigator.goToHelp(context);
-            },
-          ),
-        ],
+      actions: <Widget>[
+        IconButton(
+          icon: Icon(Icons.help_outline),
+          onPressed: () {
+            //navigate to help page
+            MyNavigator.goToHelp(context);
+          },
+        ),
+        IconButton(
+          icon: Icon(Icons.info_outline),
+          onPressed: () {
+            //navigate to app information page
+            MyNavigator.goToAboutUs(context);
+          },
+        ),
+      ],
         title: Text(
           'Help',
           style: GoogleFonts.pacifico(),
         ),
       ),
-      drawer: CommonDrawer(),  
         backgroundColor: Colors.white,
         body: ListView(
           children: <Widget>[
