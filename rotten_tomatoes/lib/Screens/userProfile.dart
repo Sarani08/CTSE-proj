@@ -38,6 +38,7 @@ class _UserProfileState extends State<UserProfile> {
   User user;
   File _image;
 
+
   @override
   void initState(){
     _email = widget.email;
@@ -76,7 +77,7 @@ class _UserProfileState extends State<UserProfile> {
         actions: <Widget>[
           new FlatButton(
               child: new Text('Logout',
-                  style: new TextStyle(fontSize: 17.0, color: Colors.white)),
+                  style: new TextStyle(fontSize: 15.0, color: Colors.white)),
               onPressed: _signOut)
         ],
       ),
@@ -87,11 +88,11 @@ class _UserProfileState extends State<UserProfile> {
                 Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  Align(
+                 Align(
                     alignment: Alignment.center,
                     child: CircleAvatar(
                       radius: 100,
-                      backgroundColor: Colors.red,
+                      backgroundColor: Colors.white,
                       child: ClipOval(
                         child: new SizedBox(
                           width: 180.0,
@@ -125,10 +126,46 @@ class _UserProfileState extends State<UserProfile> {
                 height: 20.0,
               ),
                 new Divider(height: 30,color: Colors.white,),
-                new Divider(height: 30,color: Colors.white),
+
+                Container(
+                margin: EdgeInsets.all(20.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: <Widget>[
+                    Text('Username',
+                        style:
+                            TextStyle(color: Colors.blueGrey, fontSize: 18.0)),
+                    SizedBox(width: 20.0),
+                    Text('$_username',
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 18.0,
+                            fontWeight: FontWeight.bold)),
+                  ],
+                ),
+              ),  
+               Container(
+                margin: EdgeInsets.all(20.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: <Widget>[
+                    Text('Email',
+                        style:
+                            TextStyle(color: Colors.blueGrey, fontSize: 18.0)),
+                    SizedBox(width: 20.0),
+                    Text('        $_email',
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 18.0,
+                            fontWeight: FontWeight.bold)),
+                  ],
+                ),
+              ),              
+               SizedBox(
+                height: 30.0,
+              ),
+
                 new Padding(padding: new EdgeInsets.only(left: 8, right: 8),
-
-
                 
                  child: new FlatButton(onPressed: (){
                       MyNavigator.goToPlayList(context);
