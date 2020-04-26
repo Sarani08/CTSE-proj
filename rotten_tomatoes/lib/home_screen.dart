@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'navigation.dart';
+import 'package:rotten_tomatoes/Screens/root_page.dart';
+import 'package:rotten_tomatoes/Services/auth.dart';
 import 'Screens/movieHomeUI.dart';
-import 'Screens/LoginSignUpWelcome.dart';
 import 'Screens/searchUI.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -16,7 +15,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   final _pageOptions = [
     MovieHomeUI(),
     Search(),
-    LoginSignUPWelcome()
+    RootPage(auth: new Auth())
   ];
 
   @override
