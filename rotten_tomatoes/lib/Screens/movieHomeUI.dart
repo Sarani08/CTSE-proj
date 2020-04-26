@@ -5,6 +5,7 @@ import 'dart:convert';
 import 'movieDetailsUI.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../navigation.dart';
+import './drawer.dart';
 
 class MovieHomeUI extends StatefulWidget {
   @override
@@ -49,60 +50,7 @@ class _MovieHomeUIState extends State<MovieHomeUI> {
           style: GoogleFonts.pacifico(),
         ),
       ),
-      drawer: Drawer(
-        child: ListView(
-          padding: EdgeInsets.zero,
-          children: <Widget>[
-            DrawerHeader(
-              child: Text('Drawer Header'),
-              decoration: BoxDecoration(
-                color: Colors.red,
-              ),
-            ),
-            ListTile(
-              title: Text('Home'),
-              onTap: () {
-                // Update the state of the app
-                // ...
-                // Then close the drawer
-                MyNavigator.goToHome(context);
-              },
-            ),
-            ListTile(
-              title: Text('My Account'),
-              onTap: () {
-                // Update the state of the app
-                // ...
-                // Then close the drawer
-                MyNavigator.goToLoginRegisterWelcome(context);
-              },
-            ),
-            ListTile(
-              title: Text('My PlayList'),
-              onTap: () {
-                MyNavigator.goToPlayList(context);
-              },
-            ),
-            ListTile(
-              title: Text('My Userprof'),
-              onTap: () {
-                MyNavigator.goToUserProfile(context);
-              },
-            ),
-            ListTile(
-              title: Text('About Us'),
-              onTap: () {
-                // Update the state of the app
-                // ...
-                // Then close the drawer
-                MyNavigator.goToAboutUs(context);
-              },
-            ),
-          ],
-        ),
-      ),
-
-
+      drawer:   CommonDrawer(),
       body: ListView.builder(
         padding: const EdgeInsets.all(10.0) ,
         itemCount: userData == null ? 0 : userData.length,
