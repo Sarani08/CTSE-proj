@@ -82,7 +82,7 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
               ),     
           formWidget(),
           SizedBox(
-                height: 30.0,
+                height: 15.0,
               ),  
           loginButtonWidget(),
           secondaryButton(),
