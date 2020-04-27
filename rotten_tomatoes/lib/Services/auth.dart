@@ -1,5 +1,4 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import '../models/user.dart';
 import 'dart:async';
 
 // creating a global firebase instance and using it to perform login/logout for a user

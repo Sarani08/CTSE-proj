@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path/path.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:rotten_tomatoes/Services/auth.dart';
-import 'package:rotten_tomatoes/models/user.dart';
 import '../navigation.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -23,6 +23,7 @@ class UserProfile extends StatefulWidget {
 }
 
 class _UserProfileState extends State<UserProfile> {
+  
   _signOut() async {
     try {
       await widget.auth.signOut();
@@ -35,7 +36,6 @@ class _UserProfileState extends State<UserProfile> {
   String _email;
   String _id;
   String _username;
-  User user;
   File _image;
 
 
@@ -78,7 +78,36 @@ class _UserProfileState extends State<UserProfile> {
           new FlatButton(
               child: new Text('Logout',
                   style: new TextStyle(fontSize: 15.0, color: Colors.white)),
-              onPressed: _signOut)
+              onPressed: () {
+                  Alert(
+                        context: context,
+                        type: AlertType.error,
+                        title: "Logout",
+                        desc: "Are you sure you want to Logout from $_email?",
+                        buttons: [
+                          DialogButton(
+                            child: Text(
+                              "Logout",
+                              style: TextStyle(color: Colors.white, fontSize: 20),
+                            ),
+                            onPressed: () {
+                              //Logout
+                              _signOut();
+                              MyNavigator.goToHome(context);
+                            },
+                            color: Colors.red,
+                          ),
+                          DialogButton(
+                            child: Text(
+                              "Cancel",
+                              style: TextStyle(color: Colors.white, fontSize: 20),
+                            ),
+                            //navigate back to the current page when cancelled
+                            onPressed: () => Navigator.pop(context),
+                            color: Colors.black26,
+                          )
+                        ],
+                      ).show();}),
         ],
       ),
       body: Center(
