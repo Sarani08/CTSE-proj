@@ -1,9 +1,11 @@
-import 'package:file/file.dart';
+import 'dart:io';
+
+import 'package:flutter/material.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:path/path.dart';
+import 'package:path/path.dart' as Path;
 import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:rotten_tomatoes/Services/auth.dart';
 import '../navigation.dart';
@@ -37,7 +39,7 @@ class _UserProfileState extends State<UserProfile> {
   String _id;
   String _username;
   File _image;
-
+  String _uploadedFileURL;
 
   @override
   void initState(){
@@ -61,13 +63,15 @@ class _UserProfileState extends State<UserProfile> {
     }
 
     Future uploadPic(BuildContext context) async{
-      String fileName = basename(_image.path);
-       StorageReference firebaseStorageRef = FirebaseStorage.instance.ref().child(fileName);
+       StorageReference firebaseStorageRef = FirebaseStorage.instance.ref().child('profiles/${Path.basename(_image.path)}');
        StorageUploadTask uploadTask = firebaseStorageRef.putFile(_image);
-       StorageTaskSnapshot taskSnapshot=await uploadTask.onComplete;
-       setState(() {
-          print("Profile Picture uploaded");
-          Scaffold.of(context).showSnackBar(SnackBar(content: Text('Profile Picture Uploaded')));
+       await uploadTask.onComplete;
+       firebaseStorageRef.getDownloadURL().then((fileURL) {
+          setState(() {
+              _uploadedFileURL = fileURL;
+              print("Profile Picture uploaded");
+              Scaffold.of(context).showSnackBar(SnackBar(content: Text('Profile Picture Uploaded')));
+          });
        });
     }
 
@@ -129,10 +133,12 @@ class _UserProfileState extends State<UserProfile> {
                           child: (_image!=null)?Image.file(
                             _image,
                             fit: BoxFit.fill,
-                          ):Image.network(
-                            "https://www.ecopetit.cat/wpic/mpic/51-515283_girls-for-facebook-profile-wallpaper-photo-on-hd.jpg",
+                          ):(_uploadedFileURL!=null)?Image.network(
+                              _uploadedFileURL,
                             fit: BoxFit.fill,
-                          ),
+                          ):Image.network(
+                            "https://media.istockphoto.com/vectors/user-profile-icon-flat-red-round-button-vector-illustration-vector-id1162440985?k=6&m=1162440985&s=170667a&w=0&h=-Dp28TcalF7T4ejiF_b51RgKcGFWi2VqSHgWHLpkCHY=",
+                            fit: BoxFit.fill,),
                         ),
                       ),
                     ),
@@ -146,6 +152,7 @@ class _UserProfileState extends State<UserProfile> {
                       ),
                       onPressed: () {
                         getImage();
+                        uploadPic(context);
                       },
                     ),
                   ),
