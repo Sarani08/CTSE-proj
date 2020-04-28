@@ -1,3 +1,9 @@
+/*
+This page is the user profile page which comes when a person logins in /registers with his/her basic information icluding name and email.
+Also in here the user has the ability of setting up his/her profile picture and also once done he can logout through this.
+Alerrt dialogs are used here
+*/
+
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -26,6 +32,7 @@ class UserProfile extends StatefulWidget {
 
 class _UserProfileState extends State<UserProfile> {
   
+  // signout the user once the user is logged in
   _signOut() async {
     try {
       await widget.auth.signOut();
@@ -43,6 +50,7 @@ class _UserProfileState extends State<UserProfile> {
 
   @override
   void initState(){
+  // binding the passed variables from previous page to UI
     _email = widget.email;
     List usernames = _email.split("@");
     _username = usernames[0].toString().toUpperCase(); 
@@ -53,6 +61,10 @@ class _UserProfileState extends State<UserProfile> {
   @override
   Widget build(BuildContext context) {
 
+    /* the below methods are used to upload profile picture by the user and upload the picture to the firebase storage.
+       the codes that were referred to are : 
+       1. https://www.c-sharpcorner.com/article/upload-image-file-to-firebase-storage-using-flutter/
+    */
     Future getImage() async {
       var image = await ImagePicker.pickImage(source: ImageSource.gallery);
  
@@ -63,6 +75,7 @@ class _UserProfileState extends State<UserProfile> {
     }
 
     Future uploadPic(BuildContext context) async{
+      //the subfolder name in firebase storage is profiles
        StorageReference firebaseStorageRef = FirebaseStorage.instance.ref().child('profiles/${Path.basename(_image.path)}');
        StorageUploadTask uploadTask = firebaseStorageRef.putFile(_image);
        await uploadTask.onComplete;
@@ -83,6 +96,7 @@ class _UserProfileState extends State<UserProfile> {
               child: new Text('Logout',
                   style: new TextStyle(fontSize: 15.0, color: Colors.white)),
               onPressed: () {
+                //Alert to confirm Logout
                   Alert(
                         context: context,
                         type: AlertType.error,
@@ -97,6 +111,7 @@ class _UserProfileState extends State<UserProfile> {
                             onPressed: () {
                               //Logout
                               _signOut();
+                              //navigate to home page onced log out
                               MyNavigator.goToHome(context);
                             },
                             color: Colors.red,
@@ -130,6 +145,7 @@ class _UserProfileState extends State<UserProfile> {
                         child: new SizedBox(
                           width: 180.0,
                           height: 180.0,
+                          //setting up profilee picture based on availability
                           child: (_image!=null)?Image.file(
                             _image,
                             fit: BoxFit.fill,
@@ -162,7 +178,7 @@ class _UserProfileState extends State<UserProfile> {
                 height: 20.0,
               ),
                 new Divider(height: 30,color: Colors.white,),
-
+              // shows the user his username and email
                 Container(
                 margin: EdgeInsets.all(20.0),
                 child: Row(
@@ -204,6 +220,7 @@ class _UserProfileState extends State<UserProfile> {
                 new Padding(padding: new EdgeInsets.only(left: 8, right: 8),
                 
                  child: new FlatButton(onPressed: (){
+                   //navigate to user based watch list
                       MyNavigator.goToWatchList(context);
                  },
                   child: new Container(
