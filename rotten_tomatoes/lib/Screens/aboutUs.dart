@@ -9,7 +9,7 @@ class About extends StatelessWidget {
   @override
   Widget build(BuildContext context) => new Scaffold(
     appBar: AppBar(
-        backgroundColor: Colors.red,
+      backgroundColor: Colors.red,
       actions: <Widget>[
         IconButton(
           icon: Icon(Icons.help_outline),
@@ -36,6 +36,7 @@ class About extends StatelessWidget {
           children: <Widget>[
             new Column(
               crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Padding(
                         padding: EdgeInsets.only(top: 100.0),
@@ -50,10 +51,10 @@ class About extends StatelessWidget {
                 ),
                 ListTile(
                   title: Text(
-                    "About Us",
+                    "version 1.0.0",
                     style: TextStyle(
                       color: Colors.redAccent,
-                      fontSize: 25,
+                      fontSize: 15,
                       fontWeight: FontWeight.bold,
                     ),
                     textAlign: TextAlign.center,
@@ -63,18 +64,21 @@ class About extends StatelessWidget {
                   height: 15.0,
                 ),
                 ListTile(
+                  contentPadding: EdgeInsets.only(left: 100),
                   leading: Icon(
                     FontAwesomeIcons.github,
                     color: Colors.redAccent,
                     size: 50,
                   ),
-                  title: Text('Source code on GitHub',
+                  title: Text('View Us on GitHub',
                       style: TextStyle(
                         color: Colors.grey[800],
-                      )),
+                      ),
+                  ),
                   onTap: () => _launchURL(),
                 ),
                 ListTile(
+                  contentPadding: EdgeInsets.only(left: 100),
                   leading: Icon(
                     FontAwesomeIcons.facebookSquare,
                     color: Colors.redAccent,
@@ -85,6 +89,19 @@ class About extends StatelessWidget {
                         color: Colors.grey[800],
                       )),
                   onTap: () => url_launcher.launch('https://www.facebook.com/'),
+                ),
+                ListTile(
+                  contentPadding: EdgeInsets.only(left: 100),
+                  leading: Icon(
+                    FontAwesomeIcons.google,
+                    color: Colors.redAccent,
+                    size: 50,
+                  ),
+                  title: Text('Email Us',
+                      style: TextStyle(
+                        color: Colors.grey[800],
+                      )),
+                  onTap: () => url_launcher.launch('https://www.gmail.com/'),
                 ),
                 SizedBox(
                   height: 15.0,
