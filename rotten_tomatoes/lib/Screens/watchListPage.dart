@@ -102,7 +102,7 @@ class WatchListState extends State<WatchListView> {
                         setState(() {
                           _rating = value;
                           //display Toast message
-                          showToast();
+                          showToast(watchlist,_rating);
                         });
                       },
                     ),
@@ -158,10 +158,10 @@ class WatchListState extends State<WatchListView> {
   }
 
   // display Toast when updated the rating
-  void showToast() {
-    api.updateList(curItem, _rating);
+  void showToast(WatchList item, double value) {
+      api.updateList(item, value);
     Fluttertoast.showToast(
-        msg: "rating $_rating updated!",
+        msg: "rating $value updated!",
         toastLength: Toast.LENGTH_LONG,
         gravity: ToastGravity.CENTER,
         timeInSecForIosWeb: 1);
