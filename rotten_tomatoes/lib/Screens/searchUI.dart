@@ -1,3 +1,11 @@
+/* This page allows a user to search a movie and get the relevant output based on the search.
+User can also navigate to movie details page using the searched results.
+The tutorials that were looked into are :
+https://medium.com/flutterpub/implementing-search-in-flutter-17dc5aa72018
+  */
+
+
+
 import 'package:flutter/material.dart';
 import '../navigation.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -17,21 +25,12 @@ class _SearchState extends State<Search> {
   bool _searching = false;
 
   _search() async {
+    //track searching to show mesage Searching,please wait ...
     setState(() {
       _searching = true;
     });
 
-    // Algolia algolia = Algolia.init(
-    //   applicationId: 'APP_ID',
-    //   apiKey: 'SEARCH_API_KEY',
-    // );
-
-    // AlgoliaQuery query = algolia.instance.index('Posts');
-    // query = query.search(_searchText.text);
-
-    // _results = (await query.getObjects()).hits;
-
-    print(_searchText);
+    //search based on the user input from nytimes.com api
     http.Response response = await http.get("https://api.nytimes.com/svc/movies/v2/reviews/search.json?query=${_searchText.text}&api-key=kq71eQPzi5qiOMAHNNc8aTOiBrYkvYWL");
     data = json.decode(response.body);
     setState(() {
@@ -71,6 +70,7 @@ class _SearchState extends State<Search> {
         padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
+          //enter search query and press search button
           children: <Widget>[
             Text("Search"),
             TextField(
@@ -131,7 +131,7 @@ class _SearchState extends State<Search> {
               String author = userData[index]["byline"];
               int id = index;
 
-
+              //Navigate to movie detail page inorder to see more details on the selected movie
               Navigator.push(context,
                   new MaterialPageRoute(builder: (context){
                     return new MovieDetailUI(imageURl ,title,summary,date,author,critics,id);

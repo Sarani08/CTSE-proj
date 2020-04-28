@@ -1,6 +1,7 @@
 /*
       LoginSignUpPage is to handle the user newly registering process and the
-      existing users login process
+      existing users login process. The idea on how to make this from was taken from an medium article mentioned here :
+      https://medium.com/swlh/flutter-login-registration-using-firebase-1bef34007b91.
 */
 
 import 'package:flutter/material.dart';
@@ -52,6 +53,8 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
             },
           ),
         ],
+
+        //switching title based on form mode
         title: _formMode == FormMode.LOGIN
             ? new Text('Login', style: GoogleFonts.pacifico())
             : new Text('Create Account', style: GoogleFonts.pacifico()),
@@ -92,6 +95,8 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
       ),
     );
   }
+
+
   Widget progressWidget() {
     if (_isLoading) {
       return Center(child: CircularProgressIndicator());
@@ -108,6 +113,8 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
         children: <Widget>[
           _emailWidget(),
           _passwordWidget(),
+
+          // confirm password widget is only shown in Signup formmode
           _formMode == FormMode.SIGNUP ? _confirmPasswordWidget() : SizedBox(
                 height: 15.0,
               ),
@@ -116,6 +123,7 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
     );
   }
 
+  //below given are the email,password,confirm passwords widgets
   Widget _emailWidget() {
     return Padding(
       padding: const EdgeInsets.fromLTRB(0.0, 5.0, 0.0, 0.0),
@@ -215,7 +223,7 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
     );
   }
 
-  //checks the password given is both equal
+  //checks whether the passwords given are equal
   confirmPassword(){
     if(_confirmpassword == _password){
       return true;
@@ -227,7 +235,7 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
     }
   }
 
-  //
+  // switching between Signup and login forms based on secondary button
   void showSignupForm() {
     _formKey.currentState.reset();
     setState(() {
@@ -235,7 +243,6 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
     });
   }
 
-  //
   void showLoginForm() {
     _formKey.currentState.reset();
     setState(() {
@@ -252,7 +259,7 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
         timeInSecForIosWeb: 2);
   }
 
-  //validate the Login and Register Form
+  //validate and save the Login and Register Form
   bool _validateAndSave() {
     final form = _formKey.currentState;
     if (form.validate()) {
@@ -262,7 +269,7 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
     return false;
   }
 
-  //validate the Login and Register Form
+  //validate and submit the Login and Register Form
   _validateAndSubmit() async {
     setState(() {
       _isLoading = true;

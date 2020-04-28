@@ -1,8 +1,13 @@
+/* This page decides on swicthing between LoginSignUp page and userfrole page based on the 
+authentication. */
+
 import 'package:flutter/material.dart';
 import 'package:rotten_tomatoes/Screens/LoginSignupPage.dart';
 import 'package:rotten_tomatoes/Screens/userProfile.dart';
 import 'package:rotten_tomatoes/Services/auth.dart';
 
+
+//Authentication status 
 enum AuthStatus {
   NOT_DETERMINED,
   NOT_LOGGED_IN,
@@ -39,6 +44,7 @@ class _RootPageState extends State<RootPage> {
     });
   }
 
+  //change status when logged in
   void _onLoggedIn() {
     widget.auth.getCurrentUser().then((user) {
       setState(() {
@@ -50,12 +56,16 @@ class _RootPageState extends State<RootPage> {
       authStatus = AuthStatus.LOGGED_IN;
     });
   }
+
+  //change status after signed out
   void _onSignedOut() {
     setState(() {
       authStatus = AuthStatus.NOT_LOGGED_IN;
       _userId = "";
     });
   }
+
+  //progressor indicator until logged in
   Widget progressScreenWidget() {
     return Scaffold(
       body: Container(
@@ -65,6 +75,8 @@ class _RootPageState extends State<RootPage> {
     );
 
   }
+
+  //checks on which page to show based on Authentication status
   @override
   Widget build(BuildContext context) {
     switch (authStatus) {

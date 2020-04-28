@@ -1,3 +1,8 @@
+/* This page is the Home page of the Pyxy application.This calls list of movies from the movie api nytimes.com
+Referred tutorials on building this :
+1.https://blog.codeminer42.com/build-your-first-app-with-flutter-getting-data-from-api-c9fb4c2a6812/
+  */
+
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:async';
@@ -17,6 +22,7 @@ class _MovieHomeUIState extends State<MovieHomeUI> {
   List userData;
   String title;
 
+  //calling the nytimes movie api to load movies.
   Future getData() async {
     http.Response response = await http.get("https://api.nytimes.com/svc/movies/v2/reviews/all.json?&api-key=kq71eQPzi5qiOMAHNNc8aTOiBrYkvYWL");
     data = json.decode(response.body);
@@ -28,6 +34,7 @@ class _MovieHomeUIState extends State<MovieHomeUI> {
   @override
   void initState() {
     super.initState();
+    //loading movies in the intialized state
     getData();
   }
 
@@ -58,6 +65,7 @@ class _MovieHomeUIState extends State<MovieHomeUI> {
           style: GoogleFonts.pacifico(),
         ),
       ),
+      //showing list of movies returned from API using a ListView
       body: ListView.builder(
         padding: const EdgeInsets.all(10.0) ,
         itemCount: userData == null ? 0 : userData.length,
@@ -90,7 +98,7 @@ class _MovieHomeUIState extends State<MovieHomeUI> {
               String author = userData[index]["byline"];
               int id = index;
 
-
+              //Navigate to movie detail page once movie is clicked
               Navigator.push(context,
                   new MaterialPageRoute(builder: (context){
                     return new MovieDetailUI(imageURl ,title,summary,date,author,critics,id);

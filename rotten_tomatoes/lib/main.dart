@@ -11,7 +11,7 @@ import 'Services/auth.dart';
 import 'Screens/userProfile.dart';
 import 'Screens/aboutUs.dart';
 
-
+//routes used in Pyxy application
 var routes = <String, WidgetBuilder>{
   "/home": (BuildContext context) => HomeScreen(),
   "/watchList": (context) => WatchListView(),
@@ -23,6 +23,7 @@ var routes = <String, WidgetBuilder>{
 };
 
 void main() {
+ //call this method if you need the binding to be initialized before calling runApp.
  WidgetsFlutterBinding.ensureInitialized();
 
 
@@ -31,6 +32,7 @@ void main() {
       theme:
           ThemeData(primaryColor: Colors.red, accentColor: Colors.yellowAccent),
       debugShowCheckedModeBanner: false,
+      //call splashscreen before home screen pops up
       home: SplashScreen(),
       routes: routes),
   );

@@ -1,8 +1,8 @@
+/* Splah screen before home screen pops up */
 import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'navigation.dart';
-// import 'package:flutkart/utils/flutkart.dart';
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -13,6 +13,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
+    //Load home page after 3 seconds of the splash screen
     Timer(Duration(seconds: 3), () => MyNavigator.goToHome(context));
   }
 
@@ -37,6 +38,7 @@ class _SplashScreenState extends State<SplashScreen> {
                       Padding(
                         padding: EdgeInsets.only(top: 100.0),
                       ),
+                      //Pyxy logo
                       Image.asset(
                         "assets/logo.JPG",
                         height: 300,
@@ -60,8 +62,8 @@ class _SplashScreenState extends State<SplashScreen> {
                     Padding(
                       padding: EdgeInsets.only(top: 20.0),
                     ),
+                    //Loading in progress for 3 seconds
                     Text(
-                    //  Flutkart.store,
                      "Loading in progress ...",
                       softWrap: true,
                       textAlign: TextAlign.center,

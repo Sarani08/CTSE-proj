@@ -1,3 +1,8 @@
+/*Extensive information about a movie can be seen using this page.
+Looked this tutorial https://medium.com/@anujguptawork/flutter-hands-on-building-a-movie-listing-app-using-flutter-part-2-movie-detail-page-12ef9c7e95cc to get an 
+idea on the UI
+ */
+
 import 'package:flutter/material.dart';
 import 'dart:ui' as ui;
 import 'package:google_fonts/google_fonts.dart';
@@ -45,6 +50,7 @@ class MovieDetailUI extends StatelessWidget {
           style: GoogleFonts.pacifico(),
         ),
       ),
+      //setting background image
       body: new Stack(fit: StackFit.expand, children: [
         new Image.network(
           imageURL,
@@ -116,6 +122,7 @@ class MovieDetailUI extends StatelessWidget {
                       Icons.add,
                     ),
                     onPressed: (){
+                      //adding relevant movie to wacthlist and navigating to watchlist
                       api.addToList(movieName,criticsPick,id,imageURL,0.25);
                       MyNavigator.goToWatchList(context);
                     },
