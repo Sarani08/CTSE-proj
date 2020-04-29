@@ -1,3 +1,16 @@
+/*
+      This is the WatchList Page where a user can pick their own choice of movie
+      and give their own preference of rating. user is also able to delete the items
+      in the list.
+      References:
+      1. https://codelabs.developers.google.com/codelabs/flutter-firebase/#8
+      2. https://www.youtube.com/watch?v=odg--WqWOSM&feature=youtu.be
+      3. https://pub.dev/packages/fluttertoast
+      4. https://pub.dev/packages/rflutter_alert
+      5. https://pub.dev/packages/flutter_rating_bar
+      https://pub.dev/packages/url_launcher
+*/
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'watchList.dart';
@@ -68,8 +81,9 @@ class WatchListState extends State<WatchListView> {
                   height: 55.0,
                   width: 55.0,
                   child: CircleAvatar(
-                          backgroundImage: NetworkImage(watchlist.avatar),
-                      ),
+                    backgroundImage:
+                        NetworkImage(watchlist.avatar), //movie image
+                  ),
                 ),
                 SizedBox(
                   width: 5.0,
@@ -85,6 +99,7 @@ class WatchListState extends State<WatchListView> {
                     Text('Critics Pick : ${watchlist.critics}',
                         style: TextStyle(color: Colors.grey)),
                     RatingBar(
+                      //rating bar for movie list
                       initialRating: watchlist.userRating,
                       direction: Axis.horizontal,
                       allowHalfRating: true,
@@ -93,16 +108,16 @@ class WatchListState extends State<WatchListView> {
                       glowColor: Colors.pinkAccent,
                       tapOnlyMode: true,
                       itemPadding: EdgeInsets.symmetric(horizontal: 0.5),
-                        itemBuilder: (context, _) => Icon(
-                          Icons.favorite,
-                          color: Colors.redAccent,
-                        ),
+                      itemBuilder: (context, _) => Icon(
+                        Icons.favorite,
+                        color: Colors.redAccent,
+                      ),
                       //rating update when changed
-                      onRatingUpdate: (value){
+                      onRatingUpdate: (value) {
                         setState(() {
                           _rating = value;
                           //display Toast message
-                          showToast(watchlist,_rating);
+                          showToast(watchlist, _rating);
                         });
                       },
                     ),
@@ -117,17 +132,19 @@ class WatchListState extends State<WatchListView> {
                 IconButton(
                     icon: Icon(Icons.delete),
                     onPressed: () {
-                       //Alert box when deleting from items from watchList
+                      //pop-up Alert box when deleting items from watchList
                       Alert(
                         context: context,
                         type: AlertType.error,
                         title: "Remove",
-                        desc: "Are you sure you want to Remove item from WatchList?",
+                        desc:
+                            "Are you sure you want to Remove item from WatchList?",
                         buttons: [
                           DialogButton(
                             child: Text(
                               "Remove",
-                              style: TextStyle(color: Colors.white, fontSize: 20),
+                              style:
+                                  TextStyle(color: Colors.white, fontSize: 20),
                             ),
                             onPressed: () {
                               //delete item
@@ -140,7 +157,8 @@ class WatchListState extends State<WatchListView> {
                           DialogButton(
                             child: Text(
                               "Cancel",
-                              style: TextStyle(color: Colors.white, fontSize: 20),
+                              style:
+                                  TextStyle(color: Colors.white, fontSize: 20),
                             ),
                             //navigate back to the current page when cancelled
                             onPressed: () => Navigator.pop(context),
@@ -157,15 +175,17 @@ class WatchListState extends State<WatchListView> {
     );
   }
 
-  // display Toast when updated the rating
+  // display Toast when rating is updated
   void showToast(WatchList item, double value) {
-      api.updateList(item, value);
+    //update the rating to the database
+    api.updateList(item, value);
     Fluttertoast.showToast(
         msg: "rating $value updated!",
         toastLength: Toast.LENGTH_LONG,
         gravity: ToastGravity.CENTER,
         timeInSecForIosWeb: 1);
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -182,7 +202,7 @@ class WatchListState extends State<WatchListView> {
           IconButton(
             icon: Icon(Icons.info_outline),
             onPressed: () {
-              //navigate to app information page
+              //navigate to app creators contact page
               MyNavigator.goToAboutUs(context);
             },
           ),
@@ -204,14 +224,15 @@ class WatchListState extends State<WatchListView> {
             Flexible(
               child: buildBody(context),
             ),
-            new Container (
+            new Container(
               alignment: Alignment.bottomRight,
               child: FloatingActionButton(
                 backgroundColor: Colors.red,
                 child: Icon(
                   Icons.playlist_add,
                 ),
-                onPressed: (){
+                onPressed: () {
+                  //navigate to movie list page in the home
                   MyNavigator.goToHome(context);
                 },
               ),

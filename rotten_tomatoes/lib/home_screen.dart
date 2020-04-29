@@ -1,3 +1,7 @@
+/*
+      This page contains the bottom navigation menu.
+*/
+
 import 'package:flutter/material.dart';
 import 'package:rotten_tomatoes/Screens/root_page.dart';
 import 'package:rotten_tomatoes/Services/auth.dart';
@@ -10,6 +14,7 @@ class HomeScreen extends StatefulWidget {
   _HomeScreenState createState() => new _HomeScreenState();
 }
 
+//bottom navigation item list
 class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   bool showFirst = true;
   int _selectedIndex = 0;
@@ -20,12 +25,13 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     RootPage(auth: new Auth()),
   ];
 
+  //inisialized state
   @override
   void initState() {
     super.initState();
-
   }
 
+  //when selected a menu item to get the corresponding index
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
@@ -40,7 +46,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
         currentIndex: _selectedIndex,
         selectedItemColor: Colors.red,
         unselectedItemColor: Colors.black26,
-        onTap: (int index){
+        onTap: (int index) {
           setState(() {
             _selectedIndex = index;
           });

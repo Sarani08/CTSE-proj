@@ -1,3 +1,10 @@
+/*
+      This page includes the details of the creators as well as contacting social
+      media links.
+      References:
+      1. https://pub.dev/packages/url_launcher
+*/
+
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:url_launcher/url_launcher.dart' as url_launcher;
@@ -8,29 +15,29 @@ import '../navigation.dart';
 class About extends StatelessWidget {
   @override
   Widget build(BuildContext context) => new Scaffold(
-    appBar: AppBar(
-      backgroundColor: Colors.red,
-      actions: <Widget>[
-        IconButton(
-          icon: Icon(Icons.help_outline),
-          onPressed: () {
-            //navigate to help page
-            MyNavigator.goToHelp(context);
-          },
+        appBar: AppBar(
+          backgroundColor: Colors.red,
+          actions: <Widget>[
+            IconButton(
+              icon: Icon(Icons.help_outline),
+              onPressed: () {
+                //navigate to help page
+                MyNavigator.goToHelp(context);
+              },
+            ),
+            IconButton(
+              icon: Icon(Icons.info_outline),
+              onPressed: () {
+                //navigate to app information page
+                MyNavigator.goToAboutUs(context);
+              },
+            ),
+          ],
+          title: Text(
+            'About Us',
+            style: GoogleFonts.pacifico(),
+          ),
         ),
-        IconButton(
-          icon: Icon(Icons.info_outline),
-          onPressed: () {
-            //navigate to app information page
-            MyNavigator.goToAboutUs(context);
-          },
-        ),
-      ],
-        title: Text(
-          'About Us',
-          style: GoogleFonts.pacifico(),
-        ),
-      ),
         backgroundColor: Colors.white,
         body: ListView(
           children: <Widget>[
@@ -39,11 +46,11 @@ class About extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Padding(
-                        padding: EdgeInsets.only(top: 100.0),
-                      ),
+                  padding: EdgeInsets.only(top: 100.0),
+                ),
                 Center(
                   child: Image.asset(
-                    'assets/logo.JPG',
+                    'assets/logo.JPG', //logo image
                     alignment: Alignment.center,
                     height: 150.0,
                     width: 150.0,
@@ -70,12 +77,13 @@ class About extends StatelessWidget {
                     color: Colors.redAccent,
                     size: 50,
                   ),
-                  title: Text('View Us on GitHub',
-                      style: TextStyle(
-                        color: Colors.grey[800],
-                      ),
+                  title: Text(
+                    'View Us on GitHub',
+                    style: TextStyle(
+                      color: Colors.grey[800],
+                    ),
                   ),
-                  onTap: () => _launchURL(),
+                  onTap: () => _launchURL(), //launch github
                 ),
                 ListTile(
                   contentPadding: EdgeInsets.only(left: 100),
@@ -88,7 +96,8 @@ class About extends StatelessWidget {
                       style: TextStyle(
                         color: Colors.grey[800],
                       )),
-                  onTap: () => url_launcher.launch('https://www.facebook.com/'),
+                  onTap: () => url_launcher
+                      .launch('https://www.facebook.com/'), //launch facebook
                 ),
                 ListTile(
                   contentPadding: EdgeInsets.only(left: 100),
@@ -101,7 +110,8 @@ class About extends StatelessWidget {
                       style: TextStyle(
                         color: Colors.grey[800],
                       )),
-                  onTap: () => url_launcher.launch('https://www.gmail.com/'),
+                  onTap: () => url_launcher
+                      .launch('https://www.gmail.com/'), //launch gmail
                 ),
                 SizedBox(
                   height: 15.0,
@@ -113,6 +123,7 @@ class About extends StatelessWidget {
       );
 }
 
+// launch and navigate to the github repo link when github option is clicked
 _launchURL() async {
   const url = 'https://github.com/Sarani08/CTSE-proj';
   if (await canLaunch(url)) {
