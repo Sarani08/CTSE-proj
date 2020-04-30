@@ -1,3 +1,7 @@
+/*
+      This page includes overall application information.
+*/
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../navigation.dart';
@@ -34,7 +38,9 @@ class Help extends StatelessWidget {
             new Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
-                Padding(padding: EdgeInsets.only(top: 40.0),),
+                Padding(
+                  padding: EdgeInsets.only(top: 40.0),
+                ),
                 ListTile(
                   title: Text('How to login?',
                       style: TextStyle(
@@ -45,9 +51,18 @@ class Help extends StatelessWidget {
                       'You can use your mail to Sign-in or Register to Pyxy.',
                       style: TextStyle(color: Colors.grey[800], fontSize: 14)),
                 ),
-                Padding(padding: EdgeInsets.only(bottom: 10.0),),
-                Divider(color: Colors.black,endIndent: 10,indent: 10,thickness: 1,),
-                Padding(padding: EdgeInsets.only(top: 10.0),),
+                Padding(
+                  padding: EdgeInsets.only(bottom: 10.0),
+                ),
+                Divider(
+                  color: Colors.black,
+                  endIndent: 10,
+                  indent: 10,
+                  thickness: 1,
+                ),
+                Padding(
+                  padding: EdgeInsets.only(top: 10.0),
+                ),
                 ListTile(
                   title: Text('Search Movie',
                       style: TextStyle(
@@ -59,7 +74,9 @@ class Help extends StatelessWidget {
                       'the movie name list will be displayed',
                       style: TextStyle(color: Colors.grey[800], fontSize: 14)),
                 ),
-                Padding(padding: EdgeInsets.only(bottom: 10.0),),
+                Padding(
+                  padding: EdgeInsets.only(bottom: 10.0),
+                ),
                 ListTile(
                   title: Text('Movie Details',
                       style: TextStyle(
@@ -71,38 +88,44 @@ class Help extends StatelessWidget {
                       'Form the the list when a movie is selected the revies of the movie will be displayed ',
                       style: TextStyle(color: Colors.grey[800], fontSize: 14)),
                 ),
-                Padding(padding: EdgeInsets.only(bottom: 10.0),),
+                Padding(
+                  padding: EdgeInsets.only(bottom: 10.0),
+                ),
                 ListTile(
                   title: Text('WatchList',
                       style: TextStyle(
                           color: Colors.grey[800],
                           fontWeight: FontWeight.bold,
-                          fontSize: 18
-                      )),
-                  subtitle: Text('A watch list is a users movie list preference.'
+                          fontSize: 18)),
+                  subtitle: Text(
+                      'A watch list is a users movie list preference.'
                       'The user is able to add a users own rating to the selected movie',
-                      style: TextStyle(
-                          color: Colors.grey[800],
-                          fontSize: 14
-                      )) ,
+                      style: TextStyle(color: Colors.grey[800], fontSize: 14)),
                 ),
-                Padding(padding: EdgeInsets.only(bottom: 10.0),),
+                Padding(
+                  padding: EdgeInsets.only(bottom: 10.0),
+                ),
                 ListTile(
                   title: Text('Remove from WatchList',
                       style: TextStyle(
                           color: Colors.grey[800],
                           fontWeight: FontWeight.bold,
-                          fontSize: 18
-                      )),
+                          fontSize: 18)),
                   subtitle: Text('Movies can be removed from WatchList.',
-                      style: TextStyle(
-                          color: Colors.grey[800],
-                          fontSize: 14
-                      )) ,
+                      style: TextStyle(color: Colors.grey[800], fontSize: 14)),
                 ),
-                Padding(padding: EdgeInsets.only(bottom: 10.0),),
-                Divider(color: Colors.black,endIndent: 10,indent: 10,thickness: 1,),
-                Padding(padding: EdgeInsets.only(top: 10.0),),
+                Padding(
+                  padding: EdgeInsets.only(bottom: 10.0),
+                ),
+                Divider(
+                  color: Colors.black,
+                  endIndent: 10,
+                  indent: 10,
+                  thickness: 1,
+                ),
+                Padding(
+                  padding: EdgeInsets.only(top: 10.0),
+                ),
                 ListTile(
                   title: Text('Rate Us',
                       style: TextStyle(
@@ -113,7 +136,9 @@ class Help extends StatelessWidget {
                       'To rate us you could go to the about us page and click the link given for Facebook and reate us!',
                       style: TextStyle(color: Colors.grey[800], fontSize: 14)),
                 ),
-                Padding(padding: EdgeInsets.only(bottom: 10.0),),
+                Padding(
+                  padding: EdgeInsets.only(bottom: 10.0),
+                ),
                 ListTile(
                   title: Text('Conatact Us',
                       style: TextStyle(
@@ -124,9 +149,18 @@ class Help extends StatelessWidget {
                       'To give any suggestions or comments please contact us with the email address given in the about us  page!',
                       style: TextStyle(color: Colors.grey[800], fontSize: 14)),
                 ),
-                Padding(padding: EdgeInsets.only(bottom: 10.0),),
-                Divider(color: Colors.black,endIndent: 10,indent: 10,thickness: 1,),
-                Padding(padding: EdgeInsets.only(top: 10.0),),
+                Padding(
+                  padding: EdgeInsets.only(bottom: 10.0),
+                ),
+                Divider(
+                  color: Colors.black,
+                  endIndent: 10,
+                  indent: 10,
+                  thickness: 1,
+                ),
+                Padding(
+                  padding: EdgeInsets.only(top: 10.0),
+                ),
                 Text('@ 2020 Pyxy Inc.')
               ],
             )

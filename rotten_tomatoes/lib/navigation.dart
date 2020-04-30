@@ -25,18 +25,17 @@ class MyNavigator {
   }
 
   //navigate to Movie Details page
-  static void goToMovieDtails(BuildContext context){
+  static void goToMovieDtails(BuildContext context) {
     Navigator.pushNamed(context, "/movieDetails");
   }
 
   //navigate to About us page
-  static void goToAboutUs(BuildContext context){
+  static void goToAboutUs(BuildContext context) {
     Navigator.pushNamed(context, "/aboutUs");
   }
 
   //navigate to root page
-  static void goToRoot(BuildContext context, Auth auth){
-    Navigator.pushNamed(context, "/root", arguments : auth);
+  static void goToRoot(BuildContext context, Auth auth) {
+    Navigator.pushNamed(context, "/root", arguments: auth);
   }
-
 }
