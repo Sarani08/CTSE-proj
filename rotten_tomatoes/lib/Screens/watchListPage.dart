@@ -8,7 +8,6 @@
       3. https://pub.dev/packages/fluttertoast
       4. https://pub.dev/packages/rflutter_alert
       5. https://pub.dev/packages/flutter_rating_bar
-      https://pub.dev/packages/url_launcher
 */
 
 import 'package:cloud_firestore/cloud_firestore.dart';

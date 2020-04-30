@@ -1,7 +1,5 @@
 /*
       This page includes overall application information.
-      References:
-      1. https://pub.dev/packages/url_launcher
 */
 
 import 'package:flutter/material.dart';
