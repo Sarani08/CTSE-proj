@@ -123,7 +123,7 @@ class MovieDetailUI extends StatelessWidget {
                     ),
                     onPressed: (){
                       //adding relevant movie to wacthlist and navigating to watchlist
-                      api.addToList(movieName,criticsPick,id,imageURL,0.25);
+                      api.addToList(movieName,criticsPick,id,imageURL,0.5);
                       MyNavigator.goToWatchList(context);
                     },
                     tooltip: 'Add to preferences',
